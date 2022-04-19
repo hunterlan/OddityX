@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OddityX (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "OddityX (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
