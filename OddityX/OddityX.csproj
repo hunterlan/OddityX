@@ -13,8 +13,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Frames\CapsuleInfoFrame.xaml" />
+    <None Remove="Frames\CrewFrames\DetailCrewFrame.xaml" />
+    <None Remove="Frames\CrewFrames\ListCrewFrame.xaml" />
     <None Remove="Frames\ListCapsulesFrame.xaml" />
-    <None Remove="Frames\MainFrame.xaml" />
     <None Remove="Frames\WIPFrame.xaml" />
   </ItemGroup>
 
@@ -41,22 +42,27 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Frames\CrewFrames\DetailCrewFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Frames\WIPFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\CapsuleInfoFrame.xaml">
+    <Page Update="Frames\CapsuleFrames\CapsuleInfoFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\ListCapsulesFrame.xaml">
+    <Page Update="Frames\CapsuleFrames\ListCapsulesFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\MainFrame.xaml">
+    <Page Update="Frames\CrewFrames\ListCrewFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

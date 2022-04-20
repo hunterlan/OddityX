@@ -12,6 +12,9 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Oddity;
+using OddityX.Frames;
+using OddityX.Frames.CrewFrames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,31 +26,49 @@ namespace OddityX
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private OddityCore oddity;
         public MainWindow()
         {
             this.InitializeComponent();
+            oddity = new OddityCore();
         }
 
-        private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        private async void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
             {
-                if (item is NavigationViewItem && item.Tag.ToString() == "MainFrame")
+                if (item is NavigationViewItem && item.Tag.ToString() == "CapsuleFrame")
                 {
                     nvTopLevelNav.SelectedItem = item;
                     break;
                 }
             }
-            contentFrame.Navigate(typeof(Frames.MainFrame));
+            var capsules = await oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
+
+            LoadingRing.Visibility = Visibility.Collapsed;
+            contentFrame.Visibility = Visibility.Visible;
+            contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
         }
 
-        private void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private async void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var selectedCategory = nvTopLevelNav.SelectedItem as NavigationViewItem;
+            LoadingRing.Visibility = Visibility.Visible;
+            contentFrame.Visibility = Visibility.Collapsed;
 
-            if (selectedCategory.Tag.ToString() == "MainFrame")
+            if (selectedCategory.Tag.ToString() == "CapsuleFrame")
             {
-                contentFrame.Navigate(typeof(Frames.MainFrame));
+                var capsules = await oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
+                LoadingRing.Visibility = Visibility.Collapsed;
+                contentFrame.Visibility = Visibility.Visible;
+                contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
+            }
+            else if (selectedCategory.Tag.ToString() == "CrewFrame")
+            {
+                var crews = await oddity.CrewEndpoint.GetAll().ExecuteAsync();
+                LoadingRing.Visibility = Visibility.Collapsed;
+                contentFrame.Visibility = Visibility.Visible;
+                contentFrame.Navigate(typeof(ListCrewFrame), crews);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
             {

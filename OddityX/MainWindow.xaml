@@ -12,16 +12,21 @@
                 SelectionChanged="nvTopLevelNav_SelectionChanged" ItemInvoked="nvTopLevelNav_ItemInvoked"
                 IsTabStop="False" Header="Capsules">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Capsules" Tag="MainFrame">
+            <NavigationViewItem Content="Capsules" Tag="CapsuleFrame">
                 <NavigationViewItem.Icon>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Icon="People" Content="Crew" Tag="WIPFrame" />
+            <NavigationViewItem Icon="People" Content="Crew" Tag="CrewFrame" />
             <NavigationViewItem Icon="Refresh" Content="Launches" Tag="WIPFrame" />
             <NavigationViewItem Icon="Upload" Content="Rockets" Tag="WIPFrame" />
             </NavigationView.MenuItems>
-            <Frame x:Name="contentFrame"/>
+            <Grid>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingRing">
+                    <ProgressRing></ProgressRing>
+                </Grid>
+                <Frame x:Name="contentFrame" Visibility="Collapsed"/>
+            </Grid>
         </NavigationView>
 
 </Window>

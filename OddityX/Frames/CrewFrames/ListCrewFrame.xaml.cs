@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Oddity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,32 +12,35 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Oddity.Models.Crew;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace OddityX.Frames
+namespace OddityX.Frames.CrewFrames
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainFrame : Page
+    public sealed partial class ListCrewFrame : Page
     {
-        OddityCore oddity;
-        public MainFrame()
+        private List<CrewInfo> crews;
+        public ListCrewFrame()
         {
             this.InitializeComponent();
-            oddity = new OddityCore();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private void CrewItemChanged(object sender, RoutedEventArgs e)
         {
-            var allCapsules = await oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
+            var currentCrew = CrewListView.SelectedItem as CrewInfo;
 
-            progressRing.Visibility = Visibility.Collapsed;
-            contentFrame.Visibility = Visibility.Visible;
+            contentFrame.Navigate(typeof(DetailCrewFrame), currentCrew);
+        }
 
-            contentFrame.Navigate(typeof(ListCapsulesFrame), allCapsules);
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            crews = e.Parameter as List<CrewInfo>;
+            CrewListView.ItemsSource = crews;
         }
     }
 }
