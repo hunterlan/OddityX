@@ -8,13 +8,35 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Orientation="Vertical" Margin="24" Width="300" Padding="12">
-        <TextBlock  x:Name="Serial"></TextBlock>
-        <TextBlock  x:Name="Status"></TextBlock>
-        <TextBlock  x:Name="ReuseCount"></TextBlock>
-        <TextBlock  x:Name="WaterLandings"></TextBlock>
-        <TextBlock  x:Name="LandLandings"></TextBlock>
-        <TextBlock  x:Name="LastUpdate"></TextBlock>
-        <TextBlock  x:Name="CountLaunches"></TextBlock>
+    <StackPanel Orientation="Vertical" Margin="24">
+        <StackPanel Orientation="Horizontal">
+            <Expander x:Name="ExpandGeneral" Header="General" Width="300">
+                <Expander.Content>
+                    <StackPanel Orientation="Vertical" Margin="15" Width="250" Height="150">
+                        <TextBlock  x:Name="Serial"></TextBlock>
+                        <TextBlock  x:Name="Status"></TextBlock>
+                        <TextBlock  x:Name="ReuseCount"></TextBlock>
+                        <TextBlock  x:Name="WaterLandings"></TextBlock>
+                        <TextBlock  x:Name="LandLandings"></TextBlock>
+                        <TextBlock  x:Name="LastUpdate"></TextBlock>
+                        <TextBlock  x:Name="CountLaunches"></TextBlock>
+                    </StackPanel>
+                </Expander.Content>
+            </Expander>
+            <Expander x:Name="ExpandLaunchesName" Width="300" MaxHeight="200" Header="Launches" Expanding="ExpandLaunchesNameExpanding">
+                <Grid>
+                    <ProgressRing x:Name="LoadListProgress"></ProgressRing>
+                    <ListView x:Name="LaunchesList" Visibility="Collapsed"></ListView>
+                </Grid>
+            </Expander>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Expander x:Name="ExpandCrew" Width="300" MaxHeight="200" Header="Crew" Expanding="ExpandCrewExpanding">
+                <Grid>
+                    <ProgressRing x:Name="LoadCrewProgress"></ProgressRing>
+                    <ListView x:Name="CrewList" Visibility="Collapsed"></ListView>
+                </Grid>
+            </Expander>
+        </StackPanel>
     </StackPanel>
 </Page>

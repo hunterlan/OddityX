@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-    <StackPanel Orientation="Horizontal" Width="Auto" HorizontalAlignment="Center">
+    <StackPanel Orientation="Horizontal" Width="Auto" Margin="24,0,0,0">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing x:Name="progressRing" Visibility="Visible"/>
         </Grid>
