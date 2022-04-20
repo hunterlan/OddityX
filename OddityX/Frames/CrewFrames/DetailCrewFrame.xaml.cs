@@ -15,6 +15,7 @@ using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Oddity;
 using Oddity.Models.Crew;
+using Oddity.Models.Launches;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,9 +32,10 @@ namespace OddityX.Frames.CrewFrames
         public DetailCrewFrame()
         {
             this.InitializeComponent();
+            oddity = new OddityCore();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             currentCrew = e.Parameter as CrewInfo;
 
@@ -43,6 +45,14 @@ namespace OddityX.Frames.CrewFrames
             }
 
             NameCrew.Text = currentCrew.Name;
+            Agency.Text = $"Agency: {currentCrew.Agency}";
+            Status.Text = $"Status: {currentCrew.Status}";
+            LinkWikipedia.NavigateUri = new Uri(currentCrew.Wikipedia);
+
+            var launches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
+            var crewLaunches = launches.Where(launch => launch.CrewId.Any(ci => ci == currentCrew.Id)).ToList();
+
+            LaunchesData.ItemsSource = crewLaunches;
 
             CrewInfoPanel.Visibility = Visibility.Visible;
             Progress.Visibility = Visibility.Collapsed;
