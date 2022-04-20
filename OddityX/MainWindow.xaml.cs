@@ -43,6 +43,18 @@ namespace OddityX
 
         private void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            var selectedCategory = nvTopLevelNav.SelectedItem as NavigationViewItem;
+
+            if (selectedCategory.Tag.ToString() == "MainFrame")
+            {
+                contentFrame.Navigate(typeof(Frames.MainFrame));
+            }
+            else if (selectedCategory.Tag.ToString() == "WIPFrame")
+            {
+                contentFrame.Navigate(typeof(Frames.WIPFrame));
+            }
+
+            nvTopLevelNav.Header = selectedCategory.Content.ToString();
         }
 
         private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)

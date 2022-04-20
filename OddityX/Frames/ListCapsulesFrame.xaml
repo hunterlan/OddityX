@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Width="50*">
-        <ListView x:Name="CapsulesListView"></ListView>
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <ListView x:Name="CapsulesListView" SelectionChanged="CapsuleItemChanged" Width="300"></ListView>
+        <Frame x:Name="contentFrame"></Frame>
+    </StackPanel>
 </Page>

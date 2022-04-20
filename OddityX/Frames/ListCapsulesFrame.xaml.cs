@@ -30,6 +30,13 @@ namespace OddityX.Frames
             this.InitializeComponent();
         }
 
+        private void CapsuleItemChanged(object sender, RoutedEventArgs e)
+        {
+            var currentCapsule = CapsulesListView.SelectedItem as CapsuleInfo;
+
+            contentFrame.Navigate(typeof(CapsuleInfoFrame), currentCapsule);
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             capsulesInfo = e.Parameter as List<CapsuleInfo>;

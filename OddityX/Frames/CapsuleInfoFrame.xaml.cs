@@ -5,7 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Oddity;
+using Oddity.Models.Capsules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,23 +22,23 @@ namespace OddityX.Frames
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainFrame : Page
+    public sealed partial class CapsuleInfoFrame : Page
     {
-        OddityCore oddity;
-        public MainFrame()
+        CapsuleInfo currentCupsule;
+        public CapsuleInfoFrame()
         {
             this.InitializeComponent();
-            oddity = new OddityCore();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var allCapsules = await oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
-
-            progressRing.Visibility = Visibility.Collapsed;
-            contentFrame.Visibility = Visibility.Visible;
-
-            contentFrame.Navigate(typeof(ListCapsulesFrame), allCapsules);
+            currentCupsule = e.Parameter as CapsuleInfo;
+            Serial.Text = $"Serial: {currentCupsule.Serial}";
+            Status.Text = $"Status: {currentCupsule.Status.ToString()}";
+            ReuseCount.Text = $"Reused count: {currentCupsule.ReuseCount}";
+            WaterLandings.Text = $"Water landings: {currentCupsule?.WaterLandings?.ToString()}";
+            LandLandings.Text = $"Land landings: {currentCupsule?.LandLandings?.ToString()}";
+            CountLaunches.Text = $"Count launches: {currentCupsule.Launches.Count}";
         }
     }
 }

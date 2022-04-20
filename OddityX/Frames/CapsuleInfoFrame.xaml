@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="OddityX.Frames.CapsuleInfoFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OddityX.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Orientation="Vertical" Margin="24" Width="300" Padding="12">
+        <TextBlock  x:Name="Serial"></TextBlock>
+        <TextBlock  x:Name="Status"></TextBlock>
+        <TextBlock  x:Name="ReuseCount"></TextBlock>
+        <TextBlock  x:Name="WaterLandings"></TextBlock>
+        <TextBlock  x:Name="LandLandings"></TextBlock>
+        <TextBlock  x:Name="LastUpdate"></TextBlock>
+        <TextBlock  x:Name="CountLaunches"></TextBlock>
+    </StackPanel>
+</Page>
