@@ -50,12 +50,38 @@ namespace OddityX.Frames.CrewFrames
             LinkWikipedia.NavigateUri = new Uri(currentCrew.Wikipedia);
 
             var launches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
-            var crewLaunches = launches.Where(launch => launch.CrewId.Any(ci => ci == currentCrew.Id)).ToList();
+            var crewLaunchesList = launches.Where(launch => launch.CrewId.Any(ci => ci == currentCrew.Id)).ToList();
+            var crewLaunchesRecord = Map(crewLaunchesList);
 
-            LaunchesData.ItemsSource = crewLaunches;
+            LaunchesData.ItemsSource = crewLaunchesRecord;
 
             CrewInfoPanel.Visibility = Visibility.Visible;
             Progress.Visibility = Visibility.Collapsed;
         }
+
+        private List<LaunchRecordInfo> Map(List<LaunchInfo> launchInfo)
+        {
+            return launchInfo.Select(launch => new LaunchRecordInfo()
+            {
+                Name = launch.Name, Success = launch.Success, Upcoming = launch.Upcoming,
+                FlightNumber = launch.FlightNumber, DateUtc = launch.DateUtc, DateLocal = launch.DateLocal
+            }).ToList();
+        }
+    }
+
+    record LaunchRecordInfo
+    {
+        public string Name { get; init; }
+
+        public bool? Upcoming { get; init; }
+
+        public bool? Success { get; init; }
+
+        public uint? FlightNumber { get; init; }
+
+        public DateTime? DateUtc { get; init; }
+
+        public DateTime? DateLocal { get; init; }
+
     }
 }

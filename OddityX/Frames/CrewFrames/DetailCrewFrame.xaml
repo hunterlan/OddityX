@@ -17,7 +17,7 @@
             <StackPanel Orientation="Horizontal" >
                 <PersonPicture x:Name="CrewPicture"></PersonPicture>
                 <Grid VerticalAlignment="Center" Margin="12, 0, 0, 0">
-                    <TextBlock x:Name="NameCrew" FontSize="24"></TextBlock>
+                    <TextBlock x:Name="NameCrew" FontSize="48"></TextBlock>
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Vertical" Padding="0,0,0, 12">
@@ -25,7 +25,10 @@
                 <TextBlock x:Name="Status" FontSize="24"/>
                 <HyperlinkButton Content="Link to Wikipedia" x:Name="LinkWikipedia" />
             </StackPanel>
-            <syncfuion:SfDataGrid x:Name="LaunchesData"/>
+            <TextBlock FontSize="48" Text="Launches"></TextBlock>
+            <syncfuion:SfDataGrid x:Name="LaunchesData">
+
+            </syncfuion:SfDataGrid>
         </StackPanel>
     </Grid>
 </Page>
