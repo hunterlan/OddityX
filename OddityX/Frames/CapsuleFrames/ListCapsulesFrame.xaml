@@ -10,6 +10,6 @@
 
     <StackPanel Orientation="Horizontal" Margin="0,24">
         <ListView x:Name="CapsulesListView" SelectionChanged="CapsuleItemChanged" Width="300"></ListView>
-        <Frame x:Name="contentFrame"></Frame>
+        <Frame x:Name="ContentFrame"></Frame>
     </StackPanel>
 </Page>

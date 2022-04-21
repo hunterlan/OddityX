@@ -79,5 +79,10 @@ namespace OddityX
         private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
         }
+
+        public bool isNavViewOpen()
+        {
+            return nvTopLevelNav.IsPaneOpen;
+        }
     }
 }

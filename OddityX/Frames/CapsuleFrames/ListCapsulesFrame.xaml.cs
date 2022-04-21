@@ -34,7 +34,14 @@ namespace OddityX.Frames
         {
             var currentCapsule = CapsulesListView.SelectedItem as CapsuleInfo;
 
-            contentFrame.Navigate(typeof(CapsuleInfoFrame), currentCapsule);
+            ContentFrame.Navigate(typeof(CapsuleInfoFrame), currentCapsule);
+            var frameInfo = ContentFrame.Content as CapsuleInfoFrame;
+            frameInfo.ListViewNotify += FrameInfoOnListViewNotify;
+        }
+
+        private void FrameInfoOnListViewNotify(bool tohide)
+        {
+            CapsulesListView.Visibility = tohide ? Visibility.Collapsed : Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

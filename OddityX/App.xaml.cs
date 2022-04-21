@@ -46,6 +46,6 @@ namespace OddityX
             m_window.Activate();
         }
 
-        private Window m_window;
+        public static MainWindow m_window;
     }
 }

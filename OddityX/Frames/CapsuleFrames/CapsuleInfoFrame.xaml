@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Name="GeneralCapsule" Orientation="Vertical" Margin="24">
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+        <StackPanel Name="DataAndLaunchStack" Orientation="Horizontal" VerticalAlignment="Top">
             <Expander x:Name="ExpandGeneral" Header="General" Width="250">
                 <Expander.Content>
                     <StackPanel Orientation="Vertical" Height="250">
@@ -30,7 +30,7 @@
                 </Grid>
             </Expander>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+        <StackPanel Name="CrewAndRocketStack" Orientation="Horizontal" VerticalAlignment="Top">
             <Expander x:Name="ExpandCrew" Header="Crew" Expanding="ExpandCrewExpanding" Width="250">
                 <Grid Height="250">
                     <ProgressRing x:Name="LoadCrewProgress"></ProgressRing>

@@ -29,18 +29,28 @@ namespace OddityX.Frames
     public sealed partial class CapsuleInfoFrame : Page
     {
         CapsuleInfo currentCupsule;
-        OddityCore oddity; 
+        OddityCore oddity;
+
+        public delegate void VisibilityListHandler(bool toHide);
+
+        public event VisibilityListHandler ListViewNotify;
         
         public CapsuleInfoFrame()
         {
             this.InitializeComponent();
             oddity = new OddityCore();
-            SizeChanged += OnSizeChanged;
+            App.m_window.SizeChanged += OnSizeChanged;
+            OnSizeChanged(null, null);
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        /*private void OnSizeChanged(object sender, SizeChangedEventArgs e)*/
+        private void OnSizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            GeneralCapsule.Orientation = XamlRoot.Size.Width >= 1200 ? Orientation.Horizontal : Orientation.Vertical;
+            var isNavViewOpen = App.m_window.isNavViewOpen();
+            GeneralCapsule.Orientation = App.m_window.Bounds.Width >= 1350 && !isNavViewOpen ? Orientation.Horizontal : Orientation.Vertical;
+            DataAndLaunchStack.Orientation = CrewAndRocketStack.Orientation =
+                App.m_window.Bounds.Width >= 900 ? Orientation.Horizontal : Orientation.Vertical;
+            ListViewNotify?.Invoke(!(App.m_window.Bounds.Width >= 600));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -138,6 +148,11 @@ namespace OddityX.Frames
 
             LoadRocketProgress.Visibility = Visibility.Collapsed;
             RocketsList.Visibility = Visibility.Visible;
+        }
+
+        ~CapsuleInfoFrame()
+        {
+            App.m_window.SizeChanged -= OnSizeChanged;
         }
     }
 }
