@@ -8,33 +8,39 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Orientation="Vertical" Margin="24">
-        <StackPanel Orientation="Horizontal">
-            <Expander x:Name="ExpandGeneral" Header="General" Width="300">
+    <StackPanel Name="GeneralCapsule" Orientation="Vertical" Margin="24">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <Expander x:Name="ExpandGeneral" Header="General">
                 <Expander.Content>
-                    <StackPanel Orientation="Vertical" Margin="15" Width="250" Height="150">
-                        <TextBlock  x:Name="Serial"></TextBlock>
-                        <TextBlock  x:Name="Status"></TextBlock>
-                        <TextBlock  x:Name="ReuseCount"></TextBlock>
-                        <TextBlock  x:Name="WaterLandings"></TextBlock>
-                        <TextBlock  x:Name="LandLandings"></TextBlock>
-                        <TextBlock  x:Name="LastUpdate"></TextBlock>
-                        <TextBlock  x:Name="CountLaunches"></TextBlock>
+                    <StackPanel Orientation="Vertical" Width="250" Height="250">
+                        <TextBlock  x:Name="Serial" Margin="8"></TextBlock>
+                        <TextBlock  x:Name="Status" Margin="8, 0"></TextBlock>
+                        <TextBlock  x:Name="ReuseCount" Margin="8"></TextBlock>
+                        <TextBlock  x:Name="WaterLandings" Margin="8, 0"></TextBlock>
+                        <TextBlock  x:Name="LandLandings" Margin="8"></TextBlock>
+                        <TextBlock  x:Name="LastUpdate" TextWrapping="Wrap" Margin="8"></TextBlock>
+                        <TextBlock  x:Name="CountLaunches" Margin="8"></TextBlock>
                     </StackPanel>
                 </Expander.Content>
             </Expander>
-            <Expander x:Name="ExpandLaunchesName" Width="300" MaxHeight="200" Header="Launches" Expanding="ExpandLaunchesNameExpanding">
-                <Grid>
+            <Expander x:Name="ExpandLaunchesName" Width="250" Header="Launches" Expanding="ExpandLaunchesNameExpanding">
+                <Grid Height="250">
                     <ProgressRing x:Name="LoadListProgress"></ProgressRing>
                     <ListView x:Name="LaunchesList" Visibility="Collapsed"></ListView>
                 </Grid>
             </Expander>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Expander x:Name="ExpandCrew" Width="300" MaxHeight="200" Header="Crew" Expanding="ExpandCrewExpanding">
-                <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <Expander x:Name="ExpandCrew" Header="Crew" Expanding="ExpandCrewExpanding">
+                <Grid Height="250" Width="250">
                     <ProgressRing x:Name="LoadCrewProgress"></ProgressRing>
                     <ListView x:Name="CrewList" Visibility="Collapsed"></ListView>
+                </Grid>
+            </Expander>
+            <Expander x:Name="ExpandRocket" Header="Rockets" Expanding="ExpandRocketExpanding">
+                <Grid Height="250" Width="250">
+                    <ProgressRing x:Name="LoadRocketProgress"></ProgressRing>
+                    <ListView x:Name="RocketsList" Visibility="Collapsed"></ListView>
                 </Grid>
             </Expander>
         </StackPanel>

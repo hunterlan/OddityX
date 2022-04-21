@@ -16,6 +16,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Oddity.Models.Rockets;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -34,6 +35,12 @@ namespace OddityX.Frames
         {
             this.InitializeComponent();
             oddity = new OddityCore();
+            SizeChanged += OnSizeChanged;
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            GeneralCapsule.Orientation = XamlRoot.Size.Width >= 1200 ? Orientation.Horizontal : Orientation.Vertical;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -44,15 +51,12 @@ namespace OddityX.Frames
             ReuseCount.Text = $"Reused count: {currentCupsule?.ReuseCount}";
             WaterLandings.Text = $"Water landings: {currentCupsule?.WaterLandings?.ToString()}";
             LandLandings.Text = $"Land landings: {currentCupsule?.LandLandings?.ToString()}";
-            LastUpdate.Text = $"$Last update: {currentCupsule?.LastUpdate}";
+            LastUpdate.Text = $"Last update: {currentCupsule?.LastUpdate}";
             CountLaunches.Text = $"Count launches: {currentCupsule?.Launches.Count}";
         }
 
         private async void ExpandLaunchesNameExpanding(Expander sender, ExpanderExpandingEventArgs args)
         {
-            /*var value = currentCupsule.Launches[0].Value;
-            LaunchesList.ItemsSource = value;*/
-            
             var launchListId = currentCupsule.LaunchesId;
             var launches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
             List<LaunchInfo> capsuleLaunches = new();
@@ -101,6 +105,39 @@ namespace OddityX.Frames
 
             LoadCrewProgress.Visibility = Visibility.Collapsed;
             CrewList.Visibility = Visibility.Visible;
+        }
+
+        private async void ExpandRocketExpanding(Expander sender, ExpanderExpandingEventArgs args)
+        {
+            var launchListId = currentCupsule.LaunchesId;
+            var launches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
+            var rockets = await oddity.RocketsEndpoint.GetAll().ExecuteAsync();
+
+            List<LaunchInfo> capsuleLaunches = new();
+            List<RocketInfo> capsuleRockets = new();
+            launchListId.ForEach(launchId => capsuleLaunches.AddRange(launches.Where(l => l.Id == launchId)));
+
+            if (!capsuleLaunches.Any())
+            {
+                capsuleRockets.Add(new RocketInfo() { Name = "Haven't had rockets yet" });
+            }
+            else
+            {
+                foreach (var launch in capsuleLaunches)
+                {
+                    capsuleRockets.AddRange(rockets.FindAll(rocket => rocket.Id == launch.RocketId));
+                }
+            }
+
+            if (!capsuleRockets.Any())
+            {
+                capsuleRockets.Add(new RocketInfo() { Name = "Haven't had rockets yet" });
+            }
+
+            RocketsList.ItemsSource = capsuleRockets;
+
+            LoadRocketProgress.Visibility = Visibility.Collapsed;
+            RocketsList.Visibility = Visibility.Visible;
         }
     }
 }

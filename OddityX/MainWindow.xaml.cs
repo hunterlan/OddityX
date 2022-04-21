@@ -59,15 +59,11 @@ namespace OddityX
             if (selectedCategory.Tag.ToString() == "CapsuleFrame")
             {
                 var capsules = await oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
-                LoadingRing.Visibility = Visibility.Collapsed;
-                contentFrame.Visibility = Visibility.Visible;
                 contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
             }
             else if (selectedCategory.Tag.ToString() == "CrewFrame")
             {
                 var crews = await oddity.CrewEndpoint.GetAll().ExecuteAsync();
-                LoadingRing.Visibility = Visibility.Collapsed;
-                contentFrame.Visibility = Visibility.Visible;
                 contentFrame.Navigate(typeof(ListCrewFrame), crews);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
@@ -75,6 +71,8 @@ namespace OddityX
                 contentFrame.Navigate(typeof(Frames.WIPFrame));
             }
 
+            LoadingRing.Visibility = Visibility.Collapsed;
+            contentFrame.Visibility = Visibility.Visible;
             nvTopLevelNav.Header = selectedCategory.Content.ToString();
         }
 
