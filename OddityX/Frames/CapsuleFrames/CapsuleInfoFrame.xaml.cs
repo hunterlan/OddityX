@@ -46,7 +46,7 @@ namespace OddityX.Frames
         /*private void OnSizeChanged(object sender, SizeChangedEventArgs e)*/
         private void OnSizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
-            var isNavViewOpen = App.m_window.isNavViewOpen();
+            var isNavViewOpen = App.m_window.IsNavViewOpen();
             GeneralCapsule.Orientation = App.m_window.Bounds.Width >= 1350 && !isNavViewOpen ? Orientation.Horizontal : Orientation.Vertical;
             DataAndLaunchStack.Orientation = CrewAndRocketStack.Orientation =
                 App.m_window.Bounds.Width >= 900 ? Orientation.Horizontal : Orientation.Vertical;

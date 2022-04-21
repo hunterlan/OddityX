@@ -68,7 +68,11 @@ namespace OddityX
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
             {
-                contentFrame.Navigate(typeof(Frames.WIPFrame));
+                contentFrame.Navigate(typeof(WIPFrame));
+            }
+            else if (selectedCategory.Tag.ToString() == "Settings")
+            {
+                contentFrame.Navigate(typeof(SettingsFrame));
             }
 
             LoadingRing.Visibility = Visibility.Collapsed;
@@ -80,7 +84,7 @@ namespace OddityX
         {
         }
 
-        public bool isNavViewOpen()
+        public bool IsNavViewOpen()
         {
             return nvTopLevelNav.IsPaneOpen;
         }
