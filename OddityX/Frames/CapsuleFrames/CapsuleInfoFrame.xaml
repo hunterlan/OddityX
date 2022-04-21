@@ -10,9 +10,9 @@
 
     <StackPanel Name="GeneralCapsule" Orientation="Vertical" Margin="24">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <Expander x:Name="ExpandGeneral" Header="General">
+            <Expander x:Name="ExpandGeneral" Header="General" Width="250">
                 <Expander.Content>
-                    <StackPanel Orientation="Vertical" Width="250" Height="250">
+                    <StackPanel Orientation="Vertical" Height="250">
                         <TextBlock  x:Name="Serial" Margin="8"></TextBlock>
                         <TextBlock  x:Name="Status" Margin="8, 0"></TextBlock>
                         <TextBlock  x:Name="ReuseCount" Margin="8"></TextBlock>
@@ -31,14 +31,14 @@
             </Expander>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <Expander x:Name="ExpandCrew" Header="Crew" Expanding="ExpandCrewExpanding">
-                <Grid Height="250" Width="250">
+            <Expander x:Name="ExpandCrew" Header="Crew" Expanding="ExpandCrewExpanding" Width="250">
+                <Grid Height="250">
                     <ProgressRing x:Name="LoadCrewProgress"></ProgressRing>
                     <ListView x:Name="CrewList" Visibility="Collapsed"></ListView>
                 </Grid>
             </Expander>
-            <Expander x:Name="ExpandRocket" Header="Rockets" Expanding="ExpandRocketExpanding">
-                <Grid Height="250" Width="250">
+            <Expander x:Name="ExpandRocket" Header="Rockets" Expanding="ExpandRocketExpanding" Width="250">
+                <Grid Height="250">
                     <ProgressRing x:Name="LoadRocketProgress"></ProgressRing>
                     <ListView x:Name="RocketsList" Visibility="Collapsed"></ListView>
                 </Grid>
