@@ -42,7 +42,7 @@ namespace OddityX.Frames.LaunchFrames
             ContentFrame.Navigate(typeof(LaunchInfoFrame), currentLaunch);
         }
 
-        /*private void FindLaunchByName_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void FindLaunchByName_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var currentLaunches = LaunchesListView.ItemsSource as List<LaunchInfo>;
             if (string.IsNullOrWhiteSpace(FindLaunchByName.Text) || string.IsNullOrEmpty(FindLaunchByName.Text))
@@ -55,6 +55,6 @@ namespace OddityX.Frames.LaunchFrames
                 var filtered = currentLaunches?.Where(l => l.Name.Contains(currentText)).ToList();
                 LaunchesListView.ItemsSource = filtered;
             }
-        }*/
+        }
     }
 }
