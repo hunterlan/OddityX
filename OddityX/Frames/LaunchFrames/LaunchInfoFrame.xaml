@@ -25,7 +25,13 @@
                            SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
             </StackPanel>
             <TextBlock x:Name="LaunchDetails" TextWrapping="Wrap" Text="No description provided" 
-                       MaxWidth="400" Margin="24, 0, 0 ,0"/>
+                       Width="300" Margin="24, 0, 0 ,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <CheckBox x:Name="IsUpcoming" Content="Upcoming?"></CheckBox>
+            <CheckBox x:Name="IsSuccess" Content="Success?"></CheckBox>
+            <TextBlock x:Name="DateLocal"></TextBlock>
+            <TextBlock x:Name="DateUtc"></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
             <HyperlinkButton x:Name="RedditLink">

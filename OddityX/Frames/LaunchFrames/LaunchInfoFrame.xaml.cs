@@ -60,6 +60,11 @@ namespace OddityX.Frames.LaunchFrames
             {
                 YouTubeLink.NavigateUri = new Uri(_launch.Links.Webcast);
             }
+
+            IsSuccess.IsChecked = _launch?.Success;
+            IsUpcoming.IsChecked = _launch?.Upcoming;
+            DateLocal.Text = $"Local date and time launch: {_launch?.DateLocal.ToString()}";
+            DateUtc.Text = $"UTC date and time launch: {_launch?.DateUtc.ToString()}";
         }
     }
 }
