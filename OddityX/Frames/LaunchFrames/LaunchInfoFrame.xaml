@@ -25,7 +25,7 @@
                            SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
             </StackPanel>
             <TextBlock x:Name="LaunchDetails" TextWrapping="Wrap" Text="No description provided" 
-                       Width="300" Margin="24, 0, 0 ,0"/>
+                       Width="300"/>
         </StackPanel>
         <StackPanel Orientation="Vertical">
             <CheckBox x:Name="IsUpcoming" Content="Upcoming?"></CheckBox>

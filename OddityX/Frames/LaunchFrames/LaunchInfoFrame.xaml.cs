@@ -42,6 +42,10 @@ namespace OddityX.Frames.LaunchFrames
             {
                 LaunchPhotos.Visibility = Visibility.Collapsed;
             }
+            else
+            {
+                LaunchDetails.Margin = new Thickness(24, 0, 0, 0);
+            }
 
             if (_launch?.Links.Reddit.Campaign == null)
             {
