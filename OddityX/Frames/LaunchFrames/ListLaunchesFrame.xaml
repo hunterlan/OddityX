@@ -9,10 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel Orientation="Horizontal" Margin="0,24">
-        <StackPanel Orientation="Vertical">
+        <!--<StackPanel Orientation="Vertical">
             <TextBox x:Name="FindLaunchByName" Width="300" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="5, 0, 0, 0"/>
             <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesItemChanged" Width="300" MaxHeight="610"/>
-        </StackPanel>
+        </StackPanel>-->
+        <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesItemChanged" Width="300"/>
         <Frame x:Name="ContentFrame"></Frame>
     </StackPanel>
 </Page>
