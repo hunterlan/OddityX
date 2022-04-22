@@ -15,7 +15,11 @@
     <None Remove="Frames\CapsuleInfoFrame.xaml" />
     <None Remove="Frames\CrewFrames\DetailCrewFrame.xaml" />
     <None Remove="Frames\CrewFrames\ListCrewFrame.xaml" />
+    <None Remove="Frames\LaunchFrames\LaunchInfoFrame.xaml" />
+    <None Remove="Frames\LaunchFrames\ListLaunchesFrame.xaml" />
     <None Remove="Frames\ListCapsulesFrame.xaml" />
+    <None Remove="Frames\RocketFrames\ListRocketsFrame.xaml" />
+    <None Remove="Frames\RocketFrames\RocketInfoFrame.xaml" />
     <None Remove="Frames\SettingsFrame.xaml" />
     <None Remove="Frames\WIPFrame.xaml" />
   </ItemGroup>
@@ -44,6 +48,16 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Frames\LaunchFrames\LaunchInfoFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\RocketFrames\RocketInfoFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Frames\SettingsFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,6 +84,16 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Frames\CrewFrames\ListCrewFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\RocketFrames\ListRocketsFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\LaunchFrames\ListLaunchesFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

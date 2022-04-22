@@ -15,6 +15,8 @@ using Windows.Foundation.Collections;
 using Oddity;
 using OddityX.Frames;
 using OddityX.Frames.CrewFrames;
+using OddityX.Frames.LaunchFrames;
+using OddityX.Frames.RocketFrames;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -65,6 +67,16 @@ namespace OddityX
             {
                 var crews = await oddity.CrewEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListCrewFrame), crews);
+            }
+            else if (selectedCategory.Tag.ToString() == "RocketFrame")
+            {
+                var rockets = await oddity.RocketsEndpoint.GetAll().ExecuteAsync();
+                contentFrame.Navigate(typeof(ListRocketsFrame), rockets);
+            }
+            else if (selectedCategory.Tag.ToString() == "LaunchFrame")
+            {
+                var launches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
+                contentFrame.Navigate(typeof(ListLaunchesFrame), launches);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
             {

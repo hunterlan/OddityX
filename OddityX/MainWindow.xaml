@@ -18,8 +18,8 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
             <NavigationViewItem Icon="People" Content="Crew" Tag="CrewFrame" />
-            <NavigationViewItem Icon="Refresh" Content="Launches" Tag="WIPFrame" />
-            <NavigationViewItem Icon="Upload" Content="Rockets" Tag="WIPFrame" />
+            <NavigationViewItem Icon="Refresh" Content="Launches" Tag="LaunchFrame" />
+            <NavigationViewItem Icon="Upload" Content="Rockets" Tag="RocketFrame" />
             </NavigationView.MenuItems>
             <Grid>
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingRing">
