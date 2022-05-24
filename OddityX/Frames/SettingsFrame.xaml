@@ -12,7 +12,7 @@
         <TextBlock FontSize="24" Text="App theme" Margin="0, 12, 0, 0"></TextBlock>
         <RadioButton Content="Light" Tag="Light" Checked="ThemeRadioButtonChecked"/>
         <RadioButton Content="Dark" Tag="Dark" Checked="ThemeRadioButtonChecked"/>
-        <RadioButton Content="Default" Tag="Default" Checked="ThemeRadioButtonChecked" IsChecked="true"/>
+        <RadioButton Content="Use window's settings" Tag="Default" Checked="ThemeRadioButtonChecked" IsChecked="true"/>
         <TextBlock FontSize="24" Text="About this app" Margin="0, 12, 0, 0"></TextBlock>
         <TextBlock Text="Made by Kostiantyn Sharykin a.k.a hunterlan"></TextBlock>
     </StackPanel>
