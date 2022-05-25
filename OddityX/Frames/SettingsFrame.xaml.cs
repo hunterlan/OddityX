@@ -27,6 +27,22 @@ namespace OddityX.Frames
         public SettingsFrame()
         {
             this.InitializeComponent();
+            if (App.m_window.Content is FrameworkElement rootElement)
+            {
+                switch (rootElement.RequestedTheme)
+                {
+                    case ElementTheme.Dark:
+                        Dark.IsChecked = true;
+                        break;
+                    case ElementTheme.Light:
+                        Light.IsChecked = true;
+                        break;
+                    default:
+                        Default.IsChecked = true;
+                        break;
+                }
+
+            }
         }
 
         private void ThemeRadioButtonChecked(object sender, RoutedEventArgs routedEventArgs)
