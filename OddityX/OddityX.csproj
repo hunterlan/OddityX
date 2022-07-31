@@ -24,6 +24,7 @@
     <None Remove="Frames\CapsuleInfoFrame.xaml" />
     <None Remove="Frames\CrewFrames\DetailCrewFrame.xaml" />
     <None Remove="Frames\CrewFrames\ListCrewFrame.xaml" />
+    <None Remove="Frames\HistroyEventFrames\HistoryEventsCards.xaml" />
     <None Remove="Frames\LaunchFrames\LaunchInfoFrame.xaml" />
     <None Remove="Frames\LaunchFrames\ListLaunchesFrame.xaml" />
     <None Remove="Frames\ListCapsulesFrame.xaml" />
@@ -103,6 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Frames\LaunchFrames\ListLaunchesFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\HistroyEventFrames\HistoryEventsCards.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
