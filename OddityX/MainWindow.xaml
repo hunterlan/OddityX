@@ -8,10 +8,15 @@
     mc:Ignorable="d">
 
     <Grid x:Name="Root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <NavigationView x:Name="nvTopLevelNav" Loaded="nvTopLevelNav_Loaded" Margin="0,12,0,0"
+        <NavigationView x:Name="nvTopLevelNav" Loaded="nvTopLevelNav_Loaded" Margin="0,30,0,0"
                 SelectionChanged="nvTopLevelNav_SelectionChanged" ItemInvoked="nvTopLevelNav_ItemInvoked"
                 IsTabStop="False" Header="Capsules" OpenPaneLength="250" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <NavigationView.MenuItems>
+                <NavigationViewItem Content="History events" Tag="HistoryEvents">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE81C;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="Capsules" Tag="CapsuleFrame">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;"/>
@@ -28,6 +33,11 @@
                 <Frame x:Name="contentFrame" Visibility="Collapsed"/>
             </Grid>
         </NavigationView>
+        <!--UIElement set as titlebar-->
+        <Border x:Name="AppTitleBar" Background="Transparent" VerticalAlignment="Top">
+            <TextBlock x:Name="AppTitle" Text="OddityX" VerticalAlignment="Top" Margin="0,8,0,0" />
+        </Border>
+
     </Grid>
     
 

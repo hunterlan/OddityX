@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,10 @@ namespace OddityX.Helpers.HistorySpaceX
         
         public string Title { get; set; }
 
+        [JsonProperty("event_date_utc")]
         public DateTime DateUtc { get; set; }
 
+        [JsonProperty("event_date_unix")]
         public long DateUnix { get; set; }
 
         public string Details { get; set; }
