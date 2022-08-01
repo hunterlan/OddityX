@@ -31,6 +31,7 @@
     <None Remove="Frames\RocketFrames\ListRocketsFrame.xaml" />
     <None Remove="Frames\RocketFrames\RocketInfoFrame.xaml" />
     <None Remove="Frames\SettingsFrame.xaml" />
+    <None Remove="Frames\ShipsFrame.xaml" />
     <None Remove="Frames\WIPFrame.xaml" />
   </ItemGroup>
 
@@ -56,6 +57,11 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\ShipsFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Frames\LaunchFrames\LaunchInfoFrame.xaml">
