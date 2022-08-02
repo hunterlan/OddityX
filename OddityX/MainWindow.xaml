@@ -19,7 +19,7 @@
                 </NavigationViewItem>
                 <NavigationViewItem Content="Ships" Tag="Ships">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE709;"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7E3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="Capsules" Tag="CapsuleFrame">

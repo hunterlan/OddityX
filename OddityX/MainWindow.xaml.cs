@@ -30,7 +30,7 @@ namespace OddityX
             _oddity = new OddityCore();
         }
 
-        private async void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
             {

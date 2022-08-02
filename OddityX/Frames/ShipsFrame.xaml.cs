@@ -1,18 +1,12 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Oddity.Models.Ships;
+using OddityX.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,6 +19,7 @@ namespace OddityX.Frames
     public sealed partial class ShipsFrame : Page
     {
         private List<ShipInfo> _ships;
+        public ShipInfoView CurrentShip;
 
         public ShipsFrame()
         {
@@ -32,9 +27,53 @@ namespace OddityX.Frames
             this.InitializeComponent();
         }
 
-        private void ShipsList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ShipsList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            LoadingShipData.IsActive = true;
+            var selectedItem = ShipsList.SelectedItem as string;
+            CurrentShip = new(_ships.FirstOrDefault(s => s.Name.Equals(selectedItem)));
+
+            if (CurrentShip != null)
+            {
+                ShipName.Text = CurrentShip.ShipName;
+                ShipModel.Text = CurrentShip.ShipModel is not null ? $"Model: {CurrentShip.ShipModel}" : "Model isn't set up";
+                ShipType.Text = CurrentShip.ShipType is not null ? $"Type: {CurrentShip.ShipType}" : "Type isn't set up";
+                ShipStatus.Text = CurrentShip.ShipStatus;
+
+                ShipLatitude.Text = CurrentShip.ShipLatitude is not null
+                    ? $"Latitude: {CurrentShip.ShipLatitude}"
+                    : "No data about latitude";
+                ShipLongitude.Text = CurrentShip.ShipLongitude is not null
+                    ? $"Longitude: {CurrentShip.ShipLongitude}"
+                    : "No data about longitude";
+
+                if (CurrentShip.ShipLink is null)
+                {
+                    ShipLink.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ShipLink.NavigateUri = CurrentShip.ShipLink;
+                    ShipLink.Visibility = Visibility.Visible;
+                }
+
+                if (CurrentShip.ShipImage is null)
+                {
+                    ShipImage.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ShipImage.Source = new BitmapImage(new Uri(CurrentShip.ShipImage));
+                    ShipImage.Visibility = Visibility.Visible;
+                }
+
+                ShipDataUpdate.Text = CurrentShip.ShipLastUpdate is not null 
+                    ? $"Last update: {CurrentShip.ShipLastUpdate}" : "Data about last update isn't available";
+                LaunchesList.ItemsSource = await CurrentShip.GetShipLaunches();
+            }
+
+            LoadingShipData.IsActive = false;
+            ShipData.Visibility = Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
