@@ -30,7 +30,7 @@ namespace OddityX
             _oddity = new OddityCore();
         }
 
-        private async void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
             {
@@ -40,11 +40,9 @@ namespace OddityX
                     break;
                 }
             }
-            var capsules = await _oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
-
             LoadingRing.Visibility = Visibility.Collapsed;
             contentFrame.Visibility = Visibility.Visible;
-            contentFrame.Navigate(typeof(HistoryEventsCards), capsules);
+            contentFrame.Navigate(typeof(HistoryEventsCards));
         }
 
         private async void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -57,6 +55,11 @@ namespace OddityX
             {
                 var capsules = await _oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
+            }
+            else if (selectedCategory.Tag.ToString() == "Ships")
+            {
+                var ships = await _oddity.ShipsEndpoint.GetAll().ExecuteAsync();
+                contentFrame.Navigate(typeof(ShipsFrame), ships);
             }
             else if (selectedCategory.Tag.ToString() == "CrewFrame")
             {
@@ -80,6 +83,10 @@ namespace OddityX
             else if (selectedCategory.Tag.ToString() == "Settings")
             {
                 contentFrame.Navigate(typeof(SettingsFrame));
+            }
+            else
+            {
+                contentFrame.Navigate(typeof(HistoryEventsCards));
             }
 
             LoadingRing.Visibility = Visibility.Collapsed;
