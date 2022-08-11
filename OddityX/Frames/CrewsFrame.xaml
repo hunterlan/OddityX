@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="OddityX.Frames.CrewsFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OddityX.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dataGrid="using:Syncfusion.UI.Xaml.DataGrid"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <SplitView.Pane>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FindCrewByName" TextChanged="FindCrewByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
+                <ListView x:Name="CrewListView" SelectionChanged="CrewItemChanged" Width="300" Grid.Row="1"/>
+            </Grid>
+        </SplitView.Pane>
+        <Grid Margin="12">
+            <ProgressRing IsActive="False" Name="LoadingCrewData"/>
+            <StackPanel Orientation="Vertical" Visibility="Collapsed" x:Name="CrewInfoPanel">
+                <StackPanel Orientation="Horizontal" >
+                    <PersonPicture x:Name="CrewPicture"></PersonPicture>
+                    <Grid VerticalAlignment="Center" Margin="12, 0, 0, 0">
+                        <TextBlock x:Name="NameCrew" FontSize="48"></TextBlock>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Padding="0,0,0, 12">
+                    <TextBlock x:Name="Agency" FontSize="24"/>
+                    <TextBlock x:Name="Status" FontSize="24"/>
+                    <HyperlinkButton Content="Link to Wikipedia" x:Name="LinkWikipedia" />
+                </StackPanel>
+                <TextBlock FontSize="48" Text="Launches"></TextBlock>
+                <dataGrid:SfDataGrid x:Name="LaunchesData"/>
+            </StackPanel>
+        </Grid>
+    </SplitView>
+</Page>

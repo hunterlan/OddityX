@@ -22,14 +22,14 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Frames\CapsuleInfoFrame.xaml" />
-    <None Remove="Frames\CrewFrames\DetailCrewFrame.xaml" />
-    <None Remove="Frames\CrewFrames\ListCrewFrame.xaml" />
+    <None Remove="Frames\CapsulesFrame.xaml" />
+    <None Remove="Frames\CrewsFrame.xaml" />
     <None Remove="Frames\HistroyEventFrames\HistoryEventsCards.xaml" />
+    <None Remove="Frames\LaunchesFrame.xaml" />
     <None Remove="Frames\LaunchFrames\LaunchInfoFrame.xaml" />
     <None Remove="Frames\LaunchFrames\ListLaunchesFrame.xaml" />
     <None Remove="Frames\ListCapsulesFrame.xaml" />
-    <None Remove="Frames\RocketFrames\ListRocketsFrame.xaml" />
-    <None Remove="Frames\RocketFrames\RocketInfoFrame.xaml" />
+    <None Remove="Frames\RocketsFrame.xaml" />
     <None Remove="Frames\SettingsFrame.xaml" />
     <None Remove="Frames\ShipsFrame.xaml" />
     <None Remove="Frames\WIPFrame.xaml" />
@@ -59,6 +59,26 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Frames\LaunchesFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\RocketsFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\CrewsFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Frames\CapsulesFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Frames\ShipsFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -69,42 +89,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\RocketFrames\RocketInfoFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Frames\SettingsFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\CrewFrames\DetailCrewFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Frames\WIPFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Frames\CapsuleFrames\CapsuleInfoFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Frames\CapsuleFrames\ListCapsulesFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Frames\CrewFrames\ListCrewFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Frames\RocketFrames\ListRocketsFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

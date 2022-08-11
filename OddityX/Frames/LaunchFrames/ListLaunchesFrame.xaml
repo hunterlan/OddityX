@@ -10,7 +10,7 @@
 
     <StackPanel Orientation="Horizontal" Margin="0,12">
         <Grid RowDefinitions="Auto, Auto">
-            <TextBox x:Name="FindLaunchByName" Width="300" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="24, 0" Grid.Row="0"/>
+            <TextBox x:Name="FindLaunchByName" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
             <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesItemChanged" Width="300" MaxHeight="610" Grid.Row="1"/>
         </Grid>
         <Frame x:Name="ContentFrame"></Frame>

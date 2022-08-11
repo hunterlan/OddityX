@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="OddityX.Frames.CapsulesFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OddityX.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <SplitView.Pane>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FindCapsuleByName" TextChanged="FindCapsuleByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
+                <ListView Name="CapsulesList" SelectionChanged="CapsulesList_OnSelectionChanged" Grid.Row="1"/>
+            </Grid>
+        </SplitView.Pane>
+        <Grid Margin="12">
+            <ProgressRing IsActive="False" Name="LoadingCapsuleData"/>
+            <StackPanel Orientation="Vertical" Name="CapsuleData" Visibility="Collapsed">
+                <StackPanel Name="DataAndLaunchStack" Orientation="Horizontal" VerticalAlignment="Top">
+                    <Expander x:Name="ExpandGeneral" Header="General" Width="250">
+                        <Expander.Content>
+                            <StackPanel Orientation="Vertical" Height="250">
+                                <TextBlock  x:Name="Serial" Margin="8"></TextBlock>
+                                <TextBlock  x:Name="Status" Margin="8, 0"></TextBlock>
+                                <TextBlock  x:Name="ReuseCount" Margin="8"></TextBlock>
+                                <TextBlock  x:Name="WaterLandings" Margin="8, 0"></TextBlock>
+                                <TextBlock  x:Name="LandLandings" Margin="8"></TextBlock>
+                                <TextBlock  x:Name="LastUpdate" TextWrapping="Wrap" Margin="8"></TextBlock>
+                                <TextBlock  x:Name="CountLaunches" Margin="8"></TextBlock>
+                            </StackPanel>
+                        </Expander.Content>
+                    </Expander>
+                    <Expander x:Name="ExpandLaunchesName" Width="250" Header="Launches" Expanding="ExpandLaunchesNameExpanding">
+                        <Grid Height="250">
+                            <ProgressRing x:Name="LoadListProgress"></ProgressRing>
+                            <ListView x:Name="LaunchesList" Visibility="Collapsed"></ListView>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
+                <StackPanel Name="CrewAndRocketStack" Orientation="Horizontal" VerticalAlignment="Top">
+                    <Expander x:Name="ExpandCrew" Header="Crew" Expanding="ExpandCrewExpanding" Width="250">
+                        <Grid Height="250">
+                            <ProgressRing x:Name="LoadCrewProgress"></ProgressRing>
+                            <ListView x:Name="CrewList" Visibility="Collapsed"></ListView>
+                        </Grid>
+                    </Expander>
+                    <Expander x:Name="ExpandRocket" Header="Rockets" Expanding="ExpandRocketExpanding" Width="250">
+                        <Grid Height="250">
+                            <ProgressRing x:Name="LoadRocketProgress"></ProgressRing>
+                            <ListView x:Name="RocketsList" Visibility="Collapsed"></ListView>
+                        </Grid>
+                    </Expander>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </SplitView>
+</Page>

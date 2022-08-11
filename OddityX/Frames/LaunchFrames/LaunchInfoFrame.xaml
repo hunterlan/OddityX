@@ -28,17 +28,17 @@
                        Width="300"/>
         </StackPanel>
         <StackPanel Orientation="Vertical">
-            <CheckBox x:Name="IsUpcoming" Content="Upcoming?" IsEnabled="False"></CheckBox>
-            <CheckBox x:Name="IsSuccess" Content="Success?" IsEnabled="False"></CheckBox>
-            <TextBlock x:Name="DateLocal"></TextBlock>
-            <TextBlock x:Name="DateUtc"></TextBlock>
+            <CheckBox x:Name="IsUpcoming" Content="Upcoming?" IsEnabled="False"/>
+            <CheckBox x:Name="IsSuccess" Content="Success?" IsEnabled="False"/>
+            <TextBlock x:Name="DateLocal"/>
+            <TextBlock x:Name="DateUtc"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
             <HyperlinkButton x:Name="RedditLink">
-                <Image Width="32" Height="32" Source="../../Assets/icons/reddit-svgrepo-com.svg"></Image>
+                <Image Width="32" Height="32" Source="../../Assets/icons/reddit-svgrepo-com.svg"/>
             </HyperlinkButton>
             <HyperlinkButton x:Name="YouTubeLink">
-                <Image Width="32" Height="32" Source="../../Assets/icons/youtube-svgrepo-com.svg"></Image>
+                <Image Width="32" Height="32" Source="../../Assets/icons/youtube-svgrepo-com.svg"/>
             </HyperlinkButton>
         </StackPanel>
     </StackPanel>
