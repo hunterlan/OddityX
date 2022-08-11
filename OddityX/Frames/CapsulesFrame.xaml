@@ -15,7 +15,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="FindCapsuleByName" Width="300" TextChanged="FindCapsuleByName_OnTextChanged" PlaceholderText="Search" Margin="24, 0" Grid.Row="0"/>
+                <TextBox x:Name="FindCapsuleByName" TextChanged="FindCapsuleByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
                 <ListView Name="CapsulesList" SelectionChanged="CapsulesList_OnSelectionChanged" Grid.Row="1"/>
             </Grid>
         </SplitView.Pane>
