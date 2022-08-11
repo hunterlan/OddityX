@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="OddityX.Frames.RocketsFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OddityX.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <SplitView.Pane>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FindRocketByName" TextChanged="FindRocketByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
+                <ListView x:Name="RocketsListView" SelectionChanged="RocketsListView_OnSelectionChanged" Width="300" Grid.Row="1"/>
+            </Grid>
+        </SplitView.Pane>
+        <Grid Margin="12">
+            <ProgressRing Name="RocketDataLoading" IsActive="False"/>
+            <StackPanel Orientation="Horizontal" Name="RocketData" Visibility="Collapsed">
+                <StackPanel>
+                    <FlipView x:Name="Gallery" MaxWidth="400" Height="270">
+                        <FlipView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Image Source="{x:Bind Mode=OneWay}" />
+                            </DataTemplate>
+                        </FlipView.ItemTemplate>
+                    </FlipView>
+                    <PipsPager x:Name="FlipViewPipsPager"
+                               HorizontalAlignment="Center"
+                               Margin="0, 12, 0, 0"
+                               NumberOfPages="{x:Bind _currentRocket.FlickrImages.Count}"
+                               SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
+                </StackPanel>
+                <TextBlock Name="Description" TextWrapping="Wrap" Margin="12, 0, 0, 0" Width="300"></TextBlock>
+            </StackPanel>
+        </Grid>
+    </SplitView>
+</Page>

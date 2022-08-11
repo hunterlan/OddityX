@@ -1,12 +1,7 @@
-﻿using Windows.UI;
-using Microsoft.UI;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Oddity;
 using OddityX.Frames;
-using OddityX.Frames.CrewFrames;
 using OddityX.Frames.LaunchFrames;
-using OddityX.Frames.RocketFrames;
 using OddityX.Frames.HistroyEventFrames;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -67,7 +62,7 @@ namespace OddityX
             else if (selectedCategory.Tag.ToString() == "RocketFrame")
             {
                 var rockets = await App.OddityCore.RocketsEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(ListRocketsFrame), rockets);
+                contentFrame.Navigate(typeof(RocketsFrame), rockets);
             }
             else if (selectedCategory.Tag.ToString() == "LaunchFrame")
             {
