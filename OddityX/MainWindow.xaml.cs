@@ -52,7 +52,7 @@ namespace OddityX
             if (selectedCategory.Tag.ToString() == "CapsuleFrame")
             {
                 var capsules = await App.OddityCore.CapsulesEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
+                contentFrame.Navigate(typeof(CapsulesFrame), capsules);
             }
             else if (selectedCategory.Tag.ToString() == "Ships")
             {

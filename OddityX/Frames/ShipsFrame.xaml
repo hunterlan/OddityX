@@ -11,9 +11,7 @@
 
     <SplitView IsPaneOpen="True" DisplayMode="Inline">
         <SplitView.Pane>
-            <ListView Name="ShipsList" SelectionChanged="ShipsList_OnSelectionChanged">
-
-            </ListView>
+            <ListView Name="ShipsList" SelectionChanged="ShipsList_OnSelectionChanged"/>
         </SplitView.Pane>
         <Grid Margin="12">
             <ProgressRing IsActive="False" Name="LoadingShipData"/>
