@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="OddityX.Frames.LaunchesFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OddityX.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <SplitView.Pane>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FindLaunchByName" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
+                <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesListView_OnSelectionChanged" Width="300" MaxHeight="610" Grid.Row="1"/>
+            </Grid>
+        </SplitView.Pane>
+        <Grid Margin="12">
+            <ProgressRing Name="LoadingLaunchInfo" IsActive="False"></ProgressRing>
+            <StackPanel Orientation="Vertical" Name="LaunchData" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" MaxWidth="800">
+                    <StackPanel x:Name="LaunchPhotos">
+                        <FlipView x:Name="Gallery" MaxWidth="400" Height="270">
+                            <FlipView.ItemTemplate>
+                                <DataTemplate x:DataType="x:String">
+                                    <Image Source="{x:Bind Mode=OneWay}" />
+                                </DataTemplate>
+                            </FlipView.ItemTemplate>
+                        </FlipView>
+                        <PipsPager x:Name="FlipViewPipsPager"
+                                   HorizontalAlignment="Center"
+                                   Margin="0, 12, 0, 0"
+                                   SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
+                    </StackPanel>
+                    <TextBlock x:Name="LaunchDetails" TextWrapping="Wrap" Text="No description provided" 
+                               Width="300"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <CheckBox x:Name="IsUpcoming" Content="Upcoming?" IsEnabled="False"/>
+                    <CheckBox x:Name="IsSuccess" Content="Success?" IsEnabled="False"/>
+                    <TextBlock x:Name="DateLocal"/>
+                    <TextBlock x:Name="DateUtc"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                    <HyperlinkButton x:Name="RedditLink">
+                        <Image Width="32" Height="32" Source="../../Assets/icons/reddit-svgrepo-com.svg"/>
+                    </HyperlinkButton>
+                    <HyperlinkButton x:Name="YouTubeLink">
+                        <Image Width="32" Height="32" Source="../../Assets/icons/youtube-svgrepo-com.svg"/>
+                    </HyperlinkButton>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </SplitView>
+</Page>

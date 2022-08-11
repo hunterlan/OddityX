@@ -67,7 +67,7 @@ namespace OddityX
             else if (selectedCategory.Tag.ToString() == "LaunchFrame")
             {
                 var launches = await App.OddityCore.LaunchesEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(ListLaunchesFrame), launches);
+                contentFrame.Navigate(typeof(LaunchesFrame), launches);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
             {
