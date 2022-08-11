@@ -62,7 +62,7 @@ namespace OddityX
             else if (selectedCategory.Tag.ToString() == "CrewFrame")
             {
                 var crews = await App.OddityCore.CrewEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(ListCrewFrame), crews);
+                contentFrame.Navigate(typeof(CrewsFrame), crews);
             }
             else if (selectedCategory.Tag.ToString() == "RocketFrame")
             {
