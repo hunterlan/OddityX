@@ -16,6 +16,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Microsoft.UI;
+using Oddity;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -46,8 +47,10 @@ namespace OddityX
             m_window = new MainWindow();
             m_window.Title = "OddityX";
             m_window.Activate();
+            OddityCore = new OddityCore();
         }
 
         public static MainWindow m_window;
+        public static OddityCore OddityCore;
     }
 }

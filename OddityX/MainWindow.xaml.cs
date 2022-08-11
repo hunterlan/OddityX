@@ -19,7 +19,6 @@ namespace OddityX
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private readonly OddityCore _oddity;
         private const string DefaultPage = "HistoryEvents";
 
         public MainWindow()
@@ -27,7 +26,6 @@ namespace OddityX
             InitializeComponent();
             ExtendsContentIntoTitleBar = true;  // enable custom titlebar
             SetTitleBar(AppTitleBar);      // set user ui element as titlebar
-            _oddity = new OddityCore();
         }
 
         private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
@@ -53,27 +51,27 @@ namespace OddityX
 
             if (selectedCategory.Tag.ToString() == "CapsuleFrame")
             {
-                var capsules = await _oddity.CapsulesEndpoint.GetAll().ExecuteAsync();
+                var capsules = await App.OddityCore.CapsulesEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListCapsulesFrame), capsules);
             }
             else if (selectedCategory.Tag.ToString() == "Ships")
             {
-                var ships = await _oddity.ShipsEndpoint.GetAll().ExecuteAsync();
+                var ships = await App.OddityCore.ShipsEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ShipsFrame), ships);
             }
             else if (selectedCategory.Tag.ToString() == "CrewFrame")
             {
-                var crews = await _oddity.CrewEndpoint.GetAll().ExecuteAsync();
+                var crews = await App.OddityCore.CrewEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListCrewFrame), crews);
             }
             else if (selectedCategory.Tag.ToString() == "RocketFrame")
             {
-                var rockets = await _oddity.RocketsEndpoint.GetAll().ExecuteAsync();
+                var rockets = await App.OddityCore.RocketsEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListRocketsFrame), rockets);
             }
             else if (selectedCategory.Tag.ToString() == "LaunchFrame")
             {
-                var launches = await _oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
+                var launches = await App.OddityCore.LaunchesEndpoint.GetAll().ExecuteAsync();
                 contentFrame.Navigate(typeof(ListLaunchesFrame), launches);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
