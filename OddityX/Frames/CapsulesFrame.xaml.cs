@@ -14,6 +14,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using OddityX.ViewModels;
+using Oddity.Models.Launches;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -78,6 +80,20 @@ namespace OddityX.Frames
             RocketsList.ItemsSource = await CurrentCapsule.GetCapsuleRockets();
             LoadRocketProgress.Visibility = Visibility.Collapsed;
             RocketsList.Visibility = Visibility.Visible;
+        }
+
+        private void FindCapsuleByName_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(FindCapsuleByName.Text) || string.IsNullOrEmpty(FindCapsuleByName.Text))
+            {
+                CapsulesList.ItemsSource = _capsules;
+            }
+            else
+            {
+                var currentText = FindCapsuleByName.Text;
+                var filtered = _capsules.Where(c => c.Serial.Contains(currentText)).ToList();
+                CapsulesList.ItemsSource = filtered;
+            }
         }
     }
 }

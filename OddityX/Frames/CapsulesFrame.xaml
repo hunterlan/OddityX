@@ -10,7 +10,14 @@
 
     <SplitView IsPaneOpen="True" DisplayMode="Inline">
         <SplitView.Pane>
-            <ListView Name="CapsulesList" SelectionChanged="CapsulesList_OnSelectionChanged"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="FindCapsuleByName" Width="300" TextChanged="FindCapsuleByName_OnTextChanged" PlaceholderText="Search" Margin="24, 0" Grid.Row="0"/>
+                <ListView Name="CapsulesList" SelectionChanged="CapsulesList_OnSelectionChanged" Grid.Row="1"/>
+            </Grid>
         </SplitView.Pane>
         <Grid Margin="12">
             <ProgressRing IsActive="False" Name="LoadingCapsuleData"/>
