@@ -23,8 +23,6 @@
   <ItemGroup>
     <None Remove="Frames\CapsuleInfoFrame.xaml" />
     <None Remove="Frames\CapsulesFrame.xaml" />
-    <None Remove="Frames\CrewFrames\DetailCrewFrame.xaml" />
-    <None Remove="Frames\CrewFrames\ListCrewFrame.xaml" />
     <None Remove="Frames\CrewsFrame.xaml" />
     <None Remove="Frames\HistroyEventFrames\HistoryEventsCards.xaml" />
     <None Remove="Frames\LaunchFrames\LaunchInfoFrame.xaml" />
@@ -91,17 +89,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Frames\CrewFrames\DetailCrewFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Frames\WIPFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Frames\CrewFrames\ListCrewFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
