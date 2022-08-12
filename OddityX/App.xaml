@@ -10,6 +10,8 @@
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
+            <StaticResource x:Key="WindowCaptionBackground" ResourceKey="ApplicationPageBackgroundThemeBrush" />
+            <StaticResource x:Key="WindowCaptionBackgroundDisabled" ResourceKey="ApplicationPageBackgroundThemeBrush" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

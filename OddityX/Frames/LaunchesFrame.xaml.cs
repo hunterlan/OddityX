@@ -56,50 +56,50 @@ namespace OddityX.Frames
         {
             LoadingLaunchInfo.IsActive = true;
             LaunchData.Visibility = Visibility.Collapsed;
-           _currentLaunch = LaunchesListView.SelectedItem as LaunchInfo;
+            _currentLaunch = LaunchesListView.SelectedItem as LaunchInfo;
 
-           Gallery.ItemsSource = _currentLaunch?.Links.Flickr.Original;
-           FlipViewPipsPager.NumberOfPages = _currentLaunch.Links.Flickr.Original.Count;
+            Gallery.ItemsSource = _currentLaunch?.Links.Flickr.Original;
+            FlipViewPipsPager.NumberOfPages = _currentLaunch.Links.Flickr.Original.Count;
 
             if (!string.IsNullOrEmpty(_currentLaunch?.Details))
-           {
-               LaunchDetails.Text = _currentLaunch?.Details;
-           }
+            {
+                LaunchDetails.Text = _currentLaunch?.Details;
+            }
 
-           if (_currentLaunch?.Links.Flickr.Original.Count == 0)
-           {
-               LaunchPhotos.Visibility = Visibility.Collapsed;
-           }
-           else
-           {
-               LaunchDetails.Margin = new Thickness(24, 0, 0, 0);
-           }
+            if (_currentLaunch?.Links.Flickr.Original.Count == 0)
+            {
+                LaunchPhotos.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LaunchDetails.Margin = new Thickness(24, 0, 0, 0);
+            }
 
-           if (_currentLaunch?.Links.Reddit.Campaign == null)
-           {
-               RedditLink.Visibility = Visibility.Collapsed;
-           }
-           else
-           {
-               RedditLink.NavigateUri = new Uri(_currentLaunch.Links.Reddit.Campaign);
-           }
+            if (_currentLaunch?.Links.Reddit.Campaign == null)
+            {
+                RedditLink.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                RedditLink.NavigateUri = new Uri(_currentLaunch.Links.Reddit.Campaign);
+            }
 
-           if (_currentLaunch?.Links.Webcast == null)
-           {
-               YouTubeLink.Visibility = Visibility.Collapsed;
-           }
-           else
-           {
-               YouTubeLink.NavigateUri = new Uri(_currentLaunch.Links.Webcast);
-           }
+            if (_currentLaunch?.Links.Webcast == null)
+            {
+                YouTubeLink.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                YouTubeLink.NavigateUri = new Uri(_currentLaunch.Links.Webcast);
+            }
 
-           IsSuccess.IsChecked = _currentLaunch?.Success;
-           IsUpcoming.IsChecked = _currentLaunch?.Upcoming;
-           DateLocal.Text = $"Local date and time launch: {_currentLaunch?.DateLocal.ToString()}";
-           DateUtc.Text = $"UTC date and time launch: {_currentLaunch?.DateUtc.ToString()}";
+            IsSuccess.IsChecked = _currentLaunch?.Success;
+            IsUpcoming.IsChecked = _currentLaunch?.Upcoming;
+            DateLocal.Text = $"Local date and time launch: {_currentLaunch?.DateLocal.ToString()}";
+            DateUtc.Text = $"UTC date and time launch: {_currentLaunch?.DateUtc.ToString()}";
 
-           LoadingLaunchInfo.IsActive = false;
-           LaunchData.Visibility = Visibility.Visible;
+            LoadingLaunchInfo.IsActive = false;
+            LaunchData.Visibility = Visibility.Visible;
         }
     }
 }
