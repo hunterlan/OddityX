@@ -1,8 +1,11 @@
-﻿using Microsoft.UI.Xaml;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using OddityX.Frames;
 using OddityX.Frames.LaunchFrames;
 using OddityX.Frames.HistroyEventFrames;
+using OddityX.Helpers.HistorySpaceX;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,7 +26,7 @@ namespace OddityX
             SetTitleBar(AppTitleBar);      // set user ui element as titlebar
         }
 
-        private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        private async void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
             {
@@ -35,7 +38,8 @@ namespace OddityX
             }
             LoadingRing.Visibility = Visibility.Collapsed;
             contentFrame.Visibility = Visibility.Visible;
-            contentFrame.Navigate(typeof(HistoryEventsCards));
+
+            contentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
         }
 
         private async void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -94,6 +98,20 @@ namespace OddityX
         public bool IsNavViewOpen()
         {
             return nvTopLevelNav.IsPaneOpen;
+        }
+
+        private async Task<List<HistoryModel>> GetHistoryModels()
+        {
+            HistoryActions actions = new();
+
+            try
+            {
+                return await actions.GetAll();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
