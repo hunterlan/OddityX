@@ -40,13 +40,6 @@ namespace OddityX.Frames
                 ShipType.Text = CurrentShip.ShipType is not null ? $"Type: {CurrentShip.ShipType}" : "Type isn't set up";
                 ShipStatus.Text = CurrentShip.ShipStatus;
 
-                ShipLatitude.Text = CurrentShip.ShipLatitude is not null
-                    ? $"Latitude: {CurrentShip.ShipLatitude}"
-                    : "No data about latitude";
-                ShipLongitude.Text = CurrentShip.ShipLongitude is not null
-                    ? $"Longitude: {CurrentShip.ShipLongitude}"
-                    : "No data about longitude";
-
                 if (CurrentShip.ShipLink is null)
                 {
                     ShipLink.Visibility = Visibility.Collapsed;
@@ -67,8 +60,6 @@ namespace OddityX.Frames
                     ShipImage.Visibility = Visibility.Visible;
                 }
 
-                ShipDataUpdate.Text = CurrentShip.ShipLastUpdate is not null 
-                    ? $"Last update: {CurrentShip.ShipLastUpdate}" : "Data about last update isn't available";
                 LaunchesList.ItemsSource = await CurrentShip.GetShipLaunches();
             }
 

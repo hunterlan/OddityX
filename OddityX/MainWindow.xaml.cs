@@ -83,7 +83,7 @@ namespace OddityX
             }
             else
             {
-                contentFrame.Navigate(typeof(HistoryEventsCards));
+                contentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
             }
 
             LoadingRing.Visibility = Visibility.Collapsed;

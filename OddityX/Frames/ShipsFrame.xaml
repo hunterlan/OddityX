@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
+    xmlns:viewModels="using:OddityX.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -13,26 +14,37 @@
         <SplitView.Pane>
             <ListView Name="ShipsList" SelectionChanged="ShipsList_OnSelectionChanged"/>
         </SplitView.Pane>
-        <Grid Margin="12">
+        <Grid>
             <ProgressRing IsActive="False" Name="LoadingShipData"/>
-            <StackPanel Orientation="Vertical" Name="ShipData" Visibility="Collapsed">
-                <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 12"/>
-                <StackPanel Orientation="Horizontal">
+            <Grid Margin="12" Name="ShipData" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid MaxWidth="500" Margin="12" MaxHeight="200" Grid.Column="0" Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
                     <Image Name="ShipImage" Width="500"/>
-                    <StackPanel Orientation="Vertical" Margin="8, 0, 0, 0">
+                </Grid>
+                <Grid Margin="12, 0" Grid.Column="0" Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
+                    <StackPanel Margin="4" Orientation="Vertical">
+                        <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 12" HorizontalAlignment="Center"/>
                         <TextBlock Name="ShipModel" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipType" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipStatus" TextWrapping="WrapWholeWords"/>
-                        <TextBlock Name="ShipLatitude"/>
-                        <TextBlock Name="ShipLongitude"/>
                     </StackPanel>
-                </StackPanel>
-                <Expander Header="List of launches" Width="500" Margin="0, 12, 0, 0">
-                    <ListView Name="LaunchesList"></ListView>
-                </Expander>
-                <TextBlock Name="ShipDataUpdate"/>
-                <HyperlinkButton Name="ShipLink" Content="More about ship"></HyperlinkButton>
-            </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="0" MaxHeight="200" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <ListView Name="LaunchesList" HorizontalAlignment="Center"></ListView>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <HyperlinkButton Name="ShipLink" Content="More about ship" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
         </Grid>
+        
     </SplitView>
 </Page>
