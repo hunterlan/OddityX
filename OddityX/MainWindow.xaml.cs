@@ -37,57 +37,57 @@ namespace OddityX
                 }
             }
             LoadingRing.Visibility = Visibility.Collapsed;
-            contentFrame.Visibility = Visibility.Visible;
+            ContentFrame.Visibility = Visibility.Visible;
 
-            contentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
+            ContentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
         }
 
         private async void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var selectedCategory = nvTopLevelNav.SelectedItem as NavigationViewItem;
             LoadingRing.Visibility = Visibility.Visible;
-            contentFrame.Visibility = Visibility.Collapsed;
+            ContentFrame.Visibility = Visibility.Collapsed;
 
             if (selectedCategory.Tag.ToString() == "CapsuleFrame")
             {
                 var capsules = await App.OddityCore.CapsulesEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(CapsulesFrame), capsules);
+                ContentFrame.Navigate(typeof(CapsulesFrame), capsules);
             }
             else if (selectedCategory.Tag.ToString() == "Ships")
             {
                 var ships = await App.OddityCore.ShipsEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(ShipsFrame), ships);
+                ContentFrame.Navigate(typeof(ShipsFrame), ships);
             }
             else if (selectedCategory.Tag.ToString() == "CrewFrame")
             {
                 var crews = await App.OddityCore.CrewEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(CrewsFrame), crews);
+                ContentFrame.Navigate(typeof(CrewsFrame), crews);
             }
             else if (selectedCategory.Tag.ToString() == "RocketFrame")
             {
                 var rockets = await App.OddityCore.RocketsEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(RocketsFrame), rockets);
+                ContentFrame.Navigate(typeof(RocketsFrame), rockets);
             }
             else if (selectedCategory.Tag.ToString() == "LaunchFrame")
             {
                 var launches = await App.OddityCore.LaunchesEndpoint.GetAll().ExecuteAsync();
-                contentFrame.Navigate(typeof(LaunchesFrame), launches);
+                ContentFrame.Navigate(typeof(LaunchesFrame), launches);
             }
             else if (selectedCategory.Tag.ToString() == "WIPFrame")
             {
-                contentFrame.Navigate(typeof(WIPFrame));
+                ContentFrame.Navigate(typeof(WIPFrame));
             }
             else if (selectedCategory.Tag.ToString() == "Settings")
             {
-                contentFrame.Navigate(typeof(SettingsFrame));
+                ContentFrame.Navigate(typeof(SettingsFrame));
             }
             else
             {
-                contentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
+                ContentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
             }
 
             LoadingRing.Visibility = Visibility.Collapsed;
-            contentFrame.Visibility = Visibility.Visible;
+            ContentFrame.Visibility = Visibility.Visible;
             nvTopLevelNav.Header = selectedCategory.Content.ToString();
         }
 

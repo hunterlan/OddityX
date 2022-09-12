@@ -44,7 +44,7 @@
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingRing">
                     <ProgressRing></ProgressRing>
                 </Grid>
-                <Frame x:Name="contentFrame" Visibility="Collapsed"/>
+                <Frame x:Name="ContentFrame" Visibility="Collapsed"/>
             </Grid>
         </NavigationView>
 

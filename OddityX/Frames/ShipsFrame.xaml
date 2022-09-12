@@ -11,36 +11,66 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1100"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--Set position for launches-->
+                        <Setter Target="LaunchesGrid.Grid.Row" Value="0"/>
+                        <Setter Target="LaunchesGrid.Grid.Column" Value="1"/>
+                        <!--Set position for buttons-->
+                        <Setter Target="ButtonsGrid.Grid.Row" Value="1"/>
+                        <Setter Target="ButtonsGrid.Grid.Column" Value="1"/>
+                        <!--Set margin-->
+                        <Setter Target="ImageGrid.Margin" Value="12, 0, 12, 12"/>
+                        <Setter Target="DataGrid.Margin" Value="12, 0"/>
+                        <Setter Target="LaunchesGrid.Margin" Value="0, 0, 0, 12"/>
+                        <Setter Target="ButtonsGrid.Margin" Value="0"/>
+                        <!--Set width first column-->
+                        <Setter Target="FirstColumn.Width" Value="*"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView.Pane>
             <ListView Name="ShipsList" SelectionChanged="ShipsList_OnSelectionChanged"/>
         </SplitView.Pane>
         <Grid>
             <ProgressRing IsActive="False" Name="LoadingShipData"/>
-            <Grid Margin="12" Name="ShipData" Visibility="Collapsed">
+            <Grid Name="ShipData" Visibility="Collapsed" Margin="0, 0, 12, 0">
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition x:Name="FirstColumn" Width="auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid MaxWidth="500" Margin="12" MaxHeight="200" Grid.Column="0" Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
-                    <Image Name="ShipImage" Width="500"/>
+                <Grid Name="ImageGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
+                    <Image Name="ShipImage" Width="400"/>
                 </Grid>
-                <Grid Margin="12, 0" Grid.Column="0" Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
-                    <StackPanel Margin="4" Orientation="Vertical">
-                        <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 12" HorizontalAlignment="Center"/>
+                <Grid Name="DataGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
+                    <StackPanel MinWidth="300" Margin="4" Orientation="Vertical">
+                        <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 0" HorizontalAlignment="Stretch"/>
                         <TextBlock Name="ShipModel" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipType" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipStatus" TextWrapping="WrapWholeWords"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="0" MaxHeight="200" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-                    <ListView Name="LaunchesList" HorizontalAlignment="Center"></ListView>
+                <Grid Name="LaunchesGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="2" MaxHeight="200" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <ListView MinWidth="300" Name="LaunchesList" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ListView>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="1" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <Grid Name="ButtonsGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="3" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <HyperlinkButton Name="ShipLink" Content="More about ship" HorizontalAlignment="Center"/>
                 </Grid>
             </Grid>
