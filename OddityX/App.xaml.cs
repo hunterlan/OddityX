@@ -15,6 +15,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Microsoft.UI;
 using Oddity;
 
@@ -37,6 +38,16 @@ namespace OddityX
             this.InitializeComponent();
         }
 
+        public static bool TryGoBack(Frame contentFrame)
+        {
+            if (contentFrame.CanGoBack)
+            {
+                contentFrame.GoBack();
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -49,6 +60,7 @@ namespace OddityX
             m_window.Activate();
             OddityCore = new OddityCore();
         }
+
 
         public static MainWindow m_window;
         public static OddityCore OddityCore;

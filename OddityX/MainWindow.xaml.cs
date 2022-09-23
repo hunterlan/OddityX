@@ -6,112 +6,135 @@ using OddityX.Frames;
 using OddityX.Frames.LaunchFrames;
 using OddityX.Frames.HistroyEventFrames;
 using OddityX.Helpers.HistorySpaceX;
+using System.Linq;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace OddityX
-{
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainWindow : Window
-    {
-        private const string DefaultPage = "HistoryEvents";
+namespace OddityX;
 
-        public MainWindow()
+/// <summary>
+/// An empty window that can be used on its own or navigated to within a Frame.
+/// </summary>
+public sealed partial class MainWindow : Window
+{
+    private const string DefaultPage = "HistoryEvents";
+
+    public MainWindow()
+    {
+        InitializeComponent();
+        ExtendsContentIntoTitleBar = true;  // enable custom titlebar
+        SetTitleBar(AppTitleBar);      // set user ui element as titlebar
+    }
+
+    private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+    {
+        foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
         {
-            InitializeComponent();
-            ExtendsContentIntoTitleBar = true;  // enable custom titlebar
-            SetTitleBar(AppTitleBar);      // set user ui element as titlebar
+            if (item is NavigationViewItem && item.Tag.ToString() == DefaultPage)
+            {
+                nvTopLevelNav.SelectedItem = item;
+                break;
+            }
         }
 
-        private async void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
+        ChangePage(nvTopLevelNav.MenuItems.First() as NavigationViewItem);
+        LoadingRing.Visibility = Visibility.Collapsed;
+        ContentFrame.Visibility = Visibility.Visible;
+    }
+
+    private void NavigateBack(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+    {
+        // Section header remaining as was
+        App.TryGoBack(ContentFrame);
+        var menuItems = nvTopLevelNav.MenuItems.ToList();
+        foreach (var navItem in menuItems
+                     .Select(item => item as NavigationViewItem)
+                     .Where(navItem => string.Equals(navItem.Tag.ToString(), ContentFrame.Content.GetType().Name)))
         {
-            foreach (NavigationViewItemBase item in nvTopLevelNav.MenuItems)
+            ChangePage(navItem, true);
+            break;
+        }
+    }
+
+    private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        NavigationViewItem selectedCategory = (NavigationViewItem)args.InvokedItemContainer;
+        LoadingRing.Visibility = Visibility.Visible;
+        ContentFrame.Visibility = Visibility.Collapsed;
+
+        ChangePage(selectedCategory);
+
+        LoadingRing.Visibility = Visibility.Collapsed;
+        ContentFrame.Visibility = Visibility.Visible;
+    }
+
+    private async void ChangePage(NavigationViewItem selectedCategory, bool isNavigateBack = false)
+    {
+        if (!isNavigateBack)
+        {
+            switch (selectedCategory.Tag.ToString())
             {
-                if (item is NavigationViewItem && item.Tag.ToString() == DefaultPage)
+                case "CapsulesFrame":
                 {
-                    nvTopLevelNav.SelectedItem = item;
+                    var capsules = await App.OddityCore.CapsulesEndpoint.GetAll().ExecuteAsync();
+                    ContentFrame.Navigate(typeof(CapsulesFrame), capsules);
                     break;
                 }
+                case "ShipsFrame":
+                {
+                    var ships = await App.OddityCore.ShipsEndpoint.GetAll().ExecuteAsync();
+                    ContentFrame.Navigate(typeof(ShipsFrame), ships);
+                    break;
+                }
+                case "CrewsFrame":
+                {
+                    var crews = await App.OddityCore.CrewEndpoint.GetAll().ExecuteAsync();
+                    ContentFrame.Navigate(typeof(CrewsFrame), crews);
+                    break;
+                }
+                case "RocketsFrame":
+                {
+                    var rockets = await App.OddityCore.RocketsEndpoint.GetAll().ExecuteAsync();
+                    ContentFrame.Navigate(typeof(RocketsFrame), rockets);
+                    break;
+                }
+                case "LaunchesFrame":
+                {
+                    var launches = await App.OddityCore.LaunchesEndpoint.GetAll().ExecuteAsync();
+                    ContentFrame.Navigate(typeof(LaunchesFrame), launches);
+                    break;
+                }
+                case "WIPFrame":
+                    ContentFrame.Navigate(typeof(WIPFrame));
+                    break;
+                case "Settings":
+                    ContentFrame.Navigate(typeof(SettingsFrame));
+                    break;
+                default:
+                    ContentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
+                    break;
             }
-            LoadingRing.Visibility = Visibility.Collapsed;
-            ContentFrame.Visibility = Visibility.Visible;
-
-            ContentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
+        }
+        else
+        {
+            nvTopLevelNav.SelectedItem = selectedCategory;
         }
 
-        private async void nvTopLevelNav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        nvTopLevelNav.Header = selectedCategory.Content.ToString();
+    }
+
+    private async Task<List<HistoryModel>> GetHistoryModels()
+    {
+        HistoryActions actions = new();
+
+        try
         {
-            var selectedCategory = nvTopLevelNav.SelectedItem as NavigationViewItem;
-            LoadingRing.Visibility = Visibility.Visible;
-            ContentFrame.Visibility = Visibility.Collapsed;
-
-            if (selectedCategory.Tag.ToString() == "CapsuleFrame")
-            {
-                var capsules = await App.OddityCore.CapsulesEndpoint.GetAll().ExecuteAsync();
-                ContentFrame.Navigate(typeof(CapsulesFrame), capsules);
-            }
-            else if (selectedCategory.Tag.ToString() == "Ships")
-            {
-                var ships = await App.OddityCore.ShipsEndpoint.GetAll().ExecuteAsync();
-                ContentFrame.Navigate(typeof(ShipsFrame), ships);
-            }
-            else if (selectedCategory.Tag.ToString() == "CrewFrame")
-            {
-                var crews = await App.OddityCore.CrewEndpoint.GetAll().ExecuteAsync();
-                ContentFrame.Navigate(typeof(CrewsFrame), crews);
-            }
-            else if (selectedCategory.Tag.ToString() == "RocketFrame")
-            {
-                var rockets = await App.OddityCore.RocketsEndpoint.GetAll().ExecuteAsync();
-                ContentFrame.Navigate(typeof(RocketsFrame), rockets);
-            }
-            else if (selectedCategory.Tag.ToString() == "LaunchFrame")
-            {
-                var launches = await App.OddityCore.LaunchesEndpoint.GetAll().ExecuteAsync();
-                ContentFrame.Navigate(typeof(LaunchesFrame), launches);
-            }
-            else if (selectedCategory.Tag.ToString() == "WIPFrame")
-            {
-                ContentFrame.Navigate(typeof(WIPFrame));
-            }
-            else if (selectedCategory.Tag.ToString() == "Settings")
-            {
-                ContentFrame.Navigate(typeof(SettingsFrame));
-            }
-            else
-            {
-                ContentFrame.Navigate(typeof(HistoryEventsCards), await GetHistoryModels());
-            }
-
-            LoadingRing.Visibility = Visibility.Collapsed;
-            ContentFrame.Visibility = Visibility.Visible;
-            nvTopLevelNav.Header = selectedCategory.Content.ToString();
+            return await actions.GetAll();
         }
-
-        private void nvTopLevelNav_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        catch
         {
-        }
-
-        public bool IsNavViewOpen()
-        {
-            return nvTopLevelNav.IsPaneOpen;
-        }
-
-        private async Task<List<HistoryModel>> GetHistoryModels()
-        {
-            HistoryActions actions = new();
-
-            try
-            {
-                return await actions.GetAll();
-            }
-            catch
-            {
-                return null;
-            }
+            return null;
         }
     }
 }
