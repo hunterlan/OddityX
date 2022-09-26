@@ -77,19 +77,21 @@ namespace OddityX.Frames
 
             if (_currentLaunch?.Links.Reddit.Campaign == null)
             {
-                RedditLink.Visibility = Visibility.Collapsed;
+                RedditPanel.Visibility = Visibility.Collapsed;
             }
             else
             {
+                RedditPanel.Visibility = Visibility.Visible;
                 RedditLink.NavigateUri = new Uri(_currentLaunch.Links.Reddit.Campaign);
             }
 
             if (_currentLaunch?.Links.Webcast == null)
             {
-                YouTubeLink.Visibility = Visibility.Collapsed;
+                YoutubePanel.Visibility = Visibility.Collapsed;
             }
             else
             {
+                YoutubePanel.Visibility = Visibility.Visible;
                 YouTubeLink.NavigateUri = new Uri(_currentLaunch.Links.Webcast);
             }
 
