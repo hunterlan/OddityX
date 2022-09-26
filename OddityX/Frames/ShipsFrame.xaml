@@ -6,33 +6,80 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="using:System"
+    xmlns:viewModels="using:OddityX.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <SplitView IsPaneOpen="True" DisplayMode="Inline">
+    <SplitView Name="ShipsSplitView" IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="200">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--Set position for launches-->
+                        <Setter Target="LaunchesGrid.Grid.Row" Value="0"/>
+                        <Setter Target="LaunchesGrid.Grid.Column" Value="1"/>
+                        <!--Set position for buttons-->
+                        <Setter Target="ButtonsGrid.Grid.Row" Value="1"/>
+                        <Setter Target="ButtonsGrid.Grid.Column" Value="1"/>
+                        <!--Set margin-->
+                        <Setter Target="ImageGrid.Margin" Value="12, 0, 12, 12"/>
+                        <Setter Target="DataGrid.Margin" Value="12, 0"/>
+                        <Setter Target="LaunchesGrid.Margin" Value="0, 0, 0, 12"/>
+                        <Setter Target="ButtonsGrid.Margin" Value="0"/>
+                        <!--Set width first column-->
+                        <Setter Target="FirstColumn.Width" Value="*"/>
+
+                        <Setter Target="ShipsSplitView.OpenPaneLength" Value="225"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView.Pane>
             <ListView Name="ShipsList" SelectionChanged="ShipsList_OnSelectionChanged"/>
         </SplitView.Pane>
-        <Grid Margin="12">
+        <Grid>
             <ProgressRing IsActive="False" Name="LoadingShipData"/>
-            <StackPanel Orientation="Vertical" Name="ShipData" Visibility="Collapsed">
-                <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 12"/>
-                <StackPanel Orientation="Horizontal">
-                    <Image Name="ShipImage" Width="500"/>
-                    <StackPanel Orientation="Vertical" Margin="8, 0, 0, 0">
+            <Grid Name="ShipData" Visibility="Collapsed" Margin="0, 0, 12, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="FirstColumn" Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Name="ImageGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
+                    <Image Name="ShipImage" Width="400"/>
+                </Grid>
+                <Grid Name="DataGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="5">
+                    <StackPanel MinWidth="300" Margin="4" Orientation="Vertical">
+                        <TextBlock Name="ShipName" FontSize="24" Margin="0, 0, 0, 0" HorizontalAlignment="Stretch"/>
                         <TextBlock Name="ShipModel" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipType" TextWrapping="WrapWholeWords"/>
                         <TextBlock Name="ShipStatus" TextWrapping="WrapWholeWords"/>
-                        <TextBlock Name="ShipLatitude"/>
-                        <TextBlock Name="ShipLongitude"/>
                     </StackPanel>
-                </StackPanel>
-                <Expander Header="List of launches" Width="500" Margin="0, 12, 0, 0">
-                    <ListView Name="LaunchesList"></ListView>
-                </Expander>
-                <TextBlock Name="ShipDataUpdate"/>
-                <HyperlinkButton Name="ShipLink" Content="More about ship"></HyperlinkButton>
-            </StackPanel>
+                </Grid>
+                <Grid Name="LaunchesGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="2" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <StackPanel Orientation="Vertical" Margin="0, 4, 0, 0">
+                        <TextBlock Text="Launches" HorizontalAlignment="Center" FontSize="24"/>
+                        <ListView MinWidth="300" Name="LaunchesList" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+                <Grid Name="ButtonsGrid" Margin="12, 0, 0, 8" MinWidth="200" Grid.Column="0" Grid.Row="3" CornerRadius="5" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <HyperlinkButton Name="ShipLink" Content="More about ship" HorizontalAlignment="Center"/>
+                </Grid>
+            </Grid>
         </Grid>
+        
     </SplitView>
 </Page>

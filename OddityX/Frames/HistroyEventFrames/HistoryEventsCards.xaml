@@ -5,13 +5,27 @@
     xmlns:local="using:OddityX.Frames.HistroyEventFrames"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:historySpaceX="using:OddityX.Helpers.HistorySpaceX"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Key="HistoryEvent" x:DataType="historySpaceX:HistoryModel">
+            <StackPanel Orientation="Vertical" Margin="12, 0, 12, 24">
+                    <TextBlock FontSize="24" Text="{x:Bind Title}"/>
+                    <TextBlock Text="{x:Bind DateUtc}"/>
+                    <TextBlock Text="{x:Bind Details}" TextWrapping="WrapWholeWords"/>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
-        <ProgressRing IsActive="True" Name="LoadingHistory"/>
         <ScrollViewer>
-            <StackPanel Orientation="Vertical" Name="PanelForCards" Margin="0, 0, 0, 24" />
+            <ItemsRepeater Name="EventsHistorical" ItemsSource="{x:Bind _historyEvents}" ItemTemplate="{StaticResource HistoryEvent}"/>
         </ScrollViewer>
+        <TextBlock Name="EmptyError" Text="Sorry, we can't show you events for now." FontSize="24" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
     </Grid>
+
 </Page>

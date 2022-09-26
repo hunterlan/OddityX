@@ -26,79 +26,17 @@ namespace OddityX.Frames.HistroyEventFrames
     /// </summary>
     public sealed partial class HistoryEventsCards : Page
     {
-        private readonly HistoryActions _actions;
         private List<HistoryModel> _historyEvents;
 
-        public HistoryEventsCards()
+        public HistoryEventsCards() => InitializeComponent();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            _actions = new();
-            InitializeComponent();
-            InitializeCards();
-        }
-
-        private async void InitializeCards()
-        {
-            var isError = false;
-
-            try
+            _historyEvents = e.Parameter as List<HistoryModel>;
+            if (_historyEvents == null || !_historyEvents.Any())
             {
-                _historyEvents = await _actions.GetAll();
-            }
-            catch
-            {
-                isError = true;
-            }
-            finally
-            {
-                LoadingHistory.IsActive = false;
-            }
-
-            if (isError)
-            {
-                TextBlock errorText = new()
-                {
-                    Text = "Sorry, but we can't show history events for now."
-                };
-                PanelForCards.Children.Add(errorText);
-            }
-            else
-            {
-                var i = 0;
-
-                while (i < _historyEvents.Count)
-                {
-
-                    StackPanel card = new()
-                    {
-                        Orientation = Orientation.Vertical,
-                        Padding = new Thickness(0, 20, 0, 0)
-                    };
-
-                    TextBlock title = new()
-                    {
-                        Text = _historyEvents[i].Title,
-                        FontSize = 24
-                    };
-
-                    TextBlock date = new()
-                    {
-                        Text = _historyEvents[i].DateUtc.ToString("MM/dd/yyyy HH:mm")
-                    };
-
-                    TextBlock description = new()
-                    {
-                        Text = _historyEvents[i].Details,
-                        TextWrapping = TextWrapping.WrapWholeWords
-                    };
-
-                    card.Children.Add(title);
-                    card.Children.Add(date);
-                    card.Children.Add(description);
-
-
-                    PanelForCards.Children.Add(card);
-                    i++;
-                }
+                EventsHistorical.Visibility = Visibility.Collapsed;
+                EmptyError.Visibility = Visibility.Visible;
             }
         }
     }

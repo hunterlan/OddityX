@@ -8,40 +8,47 @@
     mc:Ignorable="d">
 
     <Grid x:Name="Root" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <NavigationView x:Name="nvTopLevelNav" Loaded="nvTopLevelNav_Loaded" Margin="0,30,0,0"
-                SelectionChanged="nvTopLevelNav_SelectionChanged" ItemInvoked="nvTopLevelNav_ItemInvoked"
-                IsTabStop="False" Header="Capsules" OpenPaneLength="250" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <!--UIElement set as titlebar-->
+        <Border
+            x:Name="AppTitleBar"
+            Background="Transparent"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Stretch"
+            Height="32"
+            Margin="60, 0, 0, 0"/>
+        <NavigationView x:Name="nvTopLevelNav" Loaded="nvTopLevelNav_Loaded" Margin="0,0,0,0"
+                        ItemInvoked="nvTopLevelNav_ItemInvoked"
+                        BackRequested="NavigateBack"
+                        IsTabStop="False" Header="Capsules" OpenPaneLength="250" 
+                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                        IsBackButtonVisible="Visible" IsBackEnabled="true">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="History events" Tag="HistoryEvents">
+                <NavigationViewItem Content="History events" Tag="HistoryEventsCards" IsSelected="true">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE81C;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Ships" Tag="Ships">
+                <NavigationViewItem Content="Ships" Tag="ShipsFrame">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7E3;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="Capsules" Tag="CapsuleFrame">
+                <NavigationViewItem Content="Capsules" Tag="CapsulesFrame">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE14C;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Icon="People" Content="Crew" Tag="CrewFrame" />
-                <NavigationViewItem Icon="Refresh" Content="Launches" Tag="LaunchFrame" />
-                <NavigationViewItem Icon="Upload" Content="Rockets" Tag="RocketFrame" />
+                <NavigationViewItem Icon="People" Content="Crew" Tag="CrewsFrame" />
+                <NavigationViewItem Icon="Refresh" Content="Launches" Tag="LaunchesFrame" />
+                <NavigationViewItem Icon="Upload" Content="Rockets" Tag="RocketsFrame" />
             </NavigationView.MenuItems>
             <Grid>
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingRing">
                     <ProgressRing></ProgressRing>
                 </Grid>
-                <Frame x:Name="contentFrame" Visibility="Collapsed"/>
+                <Frame x:Name="ContentFrame" Visibility="Collapsed"/>
             </Grid>
         </NavigationView>
-        <!--UIElement set as titlebar-->
-        <Border x:Name="AppTitleBar" Background="Transparent" VerticalAlignment="Top">
-            <TextBlock x:Name="AppTitle" Text="OddityX" VerticalAlignment="Top" Margin="0,8,0,0" />
-        </Border>
 
     </Grid>
     
