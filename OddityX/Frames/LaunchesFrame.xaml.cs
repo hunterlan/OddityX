@@ -58,20 +58,26 @@ namespace OddityX.Frames
             LaunchData.Visibility = Visibility.Collapsed;
             _currentLaunch = LaunchesListView.SelectedItem as LaunchInfo;
 
-            Gallery.ItemsSource = _currentLaunch?.Links.Flickr.Original;
-            FlipViewPipsPager.NumberOfPages = _currentLaunch.Links.Flickr.Original.Count;
+            var urlPhotos = _currentLaunch?.Links.Flickr.Original;
+            urlPhotos.Add(_currentLaunch?.Links.Patch.Large);
+
+            Gallery.ItemsSource = urlPhotos;
+            FlipViewPipsPager.NumberOfPages = urlPhotos.Count;
 
             if (!string.IsNullOrEmpty(_currentLaunch?.Details))
             {
                 LaunchDetails.Text = _currentLaunch?.Details;
             }
 
-            if (_currentLaunch?.Links.Flickr.Original.Count == 0)
+            if (urlPhotos.Count == 0)
             {
                 LaunchPhotos.Visibility = Visibility.Collapsed;
+                HeaderPhoto.Text = "No photos provided :(";
             }
             else
             {
+                HeaderPhoto.Text = "Event's photo";
+                LaunchPhotos.Visibility = Visibility.Visible;
                 LaunchDetails.Margin = new Thickness(24, 0, 0, 0);
             }
 
@@ -95,10 +101,31 @@ namespace OddityX.Frames
                 YouTubeLink.NavigateUri = new Uri(_currentLaunch.Links.Webcast);
             }
 
+            if (_currentLaunch?.Links.Wikipedia == null)
+            {
+                WikipediaPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                WikipediaPanel.Visibility = Visibility.Visible;
+                WikipediaLink.NavigateUri = new Uri(_currentLaunch.Links.Wikipedia);
+            }
+
+            if (_currentLaunch?.Links.Presskit == null)
+            {
+                PressKitPanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PressKitPanel.Visibility = Visibility.Visible;
+                PressKitLink.NavigateUri = new Uri(_currentLaunch.Links.Presskit);
+            }
+
             IsSuccess.IsChecked = _currentLaunch?.Success;
             IsUpcoming.IsChecked = _currentLaunch?.Upcoming;
-            DateLocal.Text = $"Local date and time launch: {_currentLaunch?.DateLocal.ToString()}";
-            DateUtc.Text = $"UTC date and time launch: {_currentLaunch?.DateUtc.ToString()}";
+
+            DateLocal.Text = $"Local date: {_currentLaunch?.DateLocal.ToString()}";
+            DateUtc.Text = $"UTC date: {_currentLaunch?.DateUtc.ToString()}";
 
             LoadingLaunchInfo.IsActive = false;
             LaunchData.Visibility = Visibility.Visible;
