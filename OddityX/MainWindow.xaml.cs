@@ -25,7 +25,10 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
         ExtendsContentIntoTitleBar = true;  // enable custom titlebar
         SetTitleBar(AppTitleBar);      // set user ui element as titlebar
+        App.ErrorOccured += App_ErrorOccured;
     }
+
+    
 
     private void nvTopLevelNav_Loaded(object sender, RoutedEventArgs e)
     {
@@ -136,5 +139,17 @@ public sealed partial class MainWindow : Window
         {
             return null;
         }
+    }
+
+    private void App_ErrorOccured()
+    {
+        ErrorBar.IsOpen = true;
+        ErrorBar.Content = App.LastException.Message;
+        ContentFrame.Margin = new Thickness(0, 75, 0, 0);
+    }
+
+    private void ErrorBar_CloseButtonClick(InfoBar sender, object args)
+    {
+        ContentFrame.Margin = new Thickness(0);
     }
 }
