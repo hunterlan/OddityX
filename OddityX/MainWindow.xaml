@@ -43,6 +43,7 @@
                 <NavigationViewItem Icon="Upload" Content="Rockets" Tag="RocketsFrame" />
             </NavigationView.MenuItems>
             <Grid>
+                <InfoBar Name="ErrorBar" IsOpen="False" Severity="Error" Title="Error" CloseButtonClick="ErrorBar_CloseButtonClick"/>
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="LoadingRing">
                     <ProgressRing></ProgressRing>
                 </Grid>

@@ -5,55 +5,134 @@
     xmlns:local="using:OddityX.Frames"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="using:System"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <SplitView IsPaneOpen="True" DisplayMode="Inline">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="898"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--Set position for launches-->
+                        <Setter Target="DescriptionGrid.Grid.Row" Value="0"/>
+                        <Setter Target="DescriptionGrid.Grid.Column" Value="1"/>
+                        <!--Set position for add info-->
+                        <Setter Target="InfoGrid.Grid.Row" Value="1"/>
+                        <Setter Target="InfoGrid.Grid.Column" Value="0"/>
+                        <!--Set position for buttons-->
+                        <Setter Target="ButtonsGrid.Grid.Row" Value="1"/>
+                        <Setter Target="ButtonsGrid.Grid.Column" Value="1"/>
+                        <!--Set margin-->
+                        <Setter Target="GridPhotos.Margin" Value="0, 0, 6, 12"/>
+                        <Setter Target="DescriptionGrid.Margin" Value="12, 0, 0, 12"/>
+                        <Setter Target="InfoGrid.Margin" Value="0, 0, 6, 0"/>
+                        <Setter Target="ButtonsGrid.Margin" Value="12, 0, 0, 12"/>
+                        <!--Set width first column-->
+                        <Setter Target="FirstColumn.Width" Value="*"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView.Pane>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="FindLaunchByName" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="12, 0" Grid.Row="0"/>
-                <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesListView_OnSelectionChanged" Width="300" MaxHeight="610" Grid.Row="1"/>
+                <TextBox x:Name="FindLaunchByName" TextChanged="FindLaunchByName_OnTextChanged" PlaceholderText="Search" Margin="12, 12, 12, 0" Grid.Row="0"/>
+                <ListView x:Name="LaunchesListView" SelectionChanged="LaunchesListView_OnSelectionChanged" Width="300" Grid.Row="1"/>
             </Grid>
         </SplitView.Pane>
         <Grid Margin="12">
             <ProgressRing Name="LoadingLaunchInfo" IsActive="False"></ProgressRing>
-            <StackPanel Orientation="Vertical" Name="LaunchData" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" MaxWidth="800">
-                    <StackPanel x:Name="LaunchPhotos">
-                        <FlipView x:Name="Gallery" MaxWidth="400" Height="270">
-                            <FlipView.ItemTemplate>
-                                <DataTemplate x:DataType="x:String">
-                                    <Image Source="{x:Bind Mode=OneWay}" />
-                                </DataTemplate>
-                            </FlipView.ItemTemplate>
-                        </FlipView>
-                        <PipsPager x:Name="FlipViewPipsPager"
-                                   HorizontalAlignment="Center"
-                                   Margin="0, 12, 0, 0"
-                                   SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
-                    </StackPanel>
-                    <TextBlock x:Name="LaunchDetails" TextWrapping="Wrap" Text="No description provided" 
-                               Width="300"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <CheckBox x:Name="IsUpcoming" Content="Upcoming?" IsEnabled="False"/>
-                    <CheckBox x:Name="IsSuccess" Content="Success?" IsEnabled="False"/>
-                    <TextBlock x:Name="DateLocal"/>
-                    <TextBlock x:Name="DateUtc"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                    <HyperlinkButton x:Name="RedditLink">
-                        <Image Width="32" Height="32" Source="../../Assets/icons/reddit-svgrepo-com.svg"/>
-                    </HyperlinkButton>
-                    <HyperlinkButton x:Name="YouTubeLink">
-                        <Image Width="32" Height="32" Source="../../Assets/icons/youtube-svgrepo-com.svg"/>
-                    </HyperlinkButton>
-                </StackPanel>
-            </StackPanel>
+            <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible" Height="auto" Width="auto">
+                <Grid Name="LaunchData" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="FirstColumn" Width="auto" />
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Name="GridPhotos" Grid.Column="0" Grid.Row="0" MaxHeight="470" MaxWidth="500" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Margin="0, 0, 0, 12">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Name="HeaderPhoto" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <StackPanel x:Name="LaunchPhotos" Margin="12, 12, 12, 0">
+                                <FlipView x:Name="Gallery" MaxWidth="450" Height="270">
+                                    <FlipView.ItemTemplate>
+                                        <DataTemplate x:DataType="x:String">
+                                            <Image />
+                                        </DataTemplate>
+                                    </FlipView.ItemTemplate>
+                                </FlipView>
+                                <PipsPager x:Name="FlipViewPipsPager"
+                                           HorizontalAlignment="Center"
+                                           Margin="0, 12, 0, 0"
+                                           SelectedPageIndex="{x:Bind Path=Gallery.SelectedIndex, Mode=TwoWay}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Name="DescriptionGrid" Grid.Column="0" Grid.Row="1" MaxWidth="500" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Margin="0, 0, 0, 12">
+                        <StackPanel Orientation="Vertical" Margin="12">
+                            <TextBlock Text="Description" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible" Height="auto">
+                                <TextBlock x:Name="LaunchDetails" TextWrapping="Wrap" Text="No description provided"/>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Name="InfoGrid" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Margin="0, 0, 0, 12">
+                        <StackPanel Orientation="Vertical" Margin="12, 12">
+                            <TextBlock Text="Additional data" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Is it upcoming?" VerticalAlignment="Center"/>
+                                <CheckBox x:Name="IsUpcoming" IsEnabled="False" Margin="8, 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Was is success?" VerticalAlignment="Center"/>
+                                <CheckBox x:Name="IsSuccess" IsEnabled="False" Margin="8, 0"/>
+                            </StackPanel>
+                            <TextBlock x:Name="DateLocal"/>
+                            <TextBlock x:Name="DateUtc"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Name="ButtonsGrid" Grid.Column="0" Grid.Row="3" VerticalAlignment="Top" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Margin="0, 0, 0, 0">
+                        <StackPanel Orientation="Vertical" Margin="12" HorizontalAlignment="Center">
+                            <TextBlock Text="Links" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                            <StackPanel Name="RedditPanel" Orientation="Horizontal">
+                                <TextBlock Text="See on " VerticalAlignment="Center"/>
+                                <HyperlinkButton x:Name="RedditLink">
+                                    <Image Width="24" Height="24" Source="../../Assets/icons/reddit-svgrepo-com.svg"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                            <StackPanel Name="YoutubePanel" Orientation="Horizontal">
+                                <TextBlock Text="Watch on " VerticalAlignment="Center"/>
+                                <HyperlinkButton x:Name="YouTubeLink">
+                                    <Image Width="24" Height="24" Source="../../Assets/icons/youtube-svgrepo-com.svg"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                            <StackPanel Name="WikipediaPanel" Orientation="Horizontal">
+                                <TextBlock Text="Read on " VerticalAlignment="Center"/>
+                                <HyperlinkButton x:Name="WikipediaLink">
+                                    <Image Width="24" Height="24" Source="../../Assets/icons/wikipedia-svgrepo-com.svg"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                            <StackPanel Name="PressKitPanel" Orientation="Horizontal">
+                                <TextBlock Text="Read official press kit " VerticalAlignment="Center"/>
+                                <HyperlinkButton Name="PressKitLink">
+                                    <Image Width="24" Height="24" Source="../../Assets/icons/press-svgrepo-com.svg"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </SplitView>
 </Page>
